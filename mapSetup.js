@@ -88,20 +88,8 @@ async function createMap(){
 
     let data = pushToArray(arraySelected)
 
+    console.log("data")
     console.log(data)
-
-    // Current data category of age
-    // let data = [[]]
-    //
-    // for (let i = 0; i < arrTotals9.length; i++){
-    //     console.log("")
-    //     data.push([arrTotals9[i].name, arrTotals9[i].qty]);
-    // }
-    //
-    // console.log(data);
-
-
-
 
 
     // Create the chart
@@ -150,6 +138,7 @@ async function createMap(){
 
         series: [{
             data: data,
+            format: '{data.name}',
             name: 'People per KM/2',
             tooltip: {
                 valueSuffix: '/km²'
@@ -162,11 +151,65 @@ async function createMap(){
             dataLabels: {
                 enabled: true,
                 format: '{point.name}'
+            },
+            trackByArea: true,
+            events: {
+                click: function(event){
+                    // alert(event.point.x);
+                    console.log("point");
+                    for(let i = 0; i < data.length; i++){
+
+                        if (event.point.value === data[i][1]){
+                            console.log(event.point.value + ' matches with: ' + data[i][0]);
+                            document.cookie = `clickedMapCode = ${data[i][0]}; expires = `;
+                            console.log(getCookie('clickedMapCode'));
+                            window.location.href='regionCharts.html';
+                        }
+                    }
+                }
             }
         }]
     });
 
 }
+
+// For displaying detailed broken down charts on region page
+function createRegionCharts(){
+
+    let countyData = []
+
+    console.log(getCookie('clickedMapCode'));
+
+
+    fetch('ageDataByRegion.json')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`JSON error`);
+            }
+            return response.json();
+        })
+        .then(jsonData => {
+
+            let jsondata = JSON.stringify(jsonData);
+
+            let jsondata2 = JSON.parse(jsondata);
+
+            for (let i = 0; i < jsondata2.length; i++) {
+
+                if (jsondata2[i].Location === getCookie('clickedMapCode')) {
+                    countyData.push(jsondata2[i]);
+
+                }
+            }
+
+
+            console.log(countyData)
+        })
+}
+
+
+
+
 
 function clearArray(){
     arr09 = []; arr19 = []; arr29 = []; arr39 = []; arr49 = []; arr59 = []; arr69 = []; arr79 = []; arr89 = []; arr99 = []; arr100 = [];
@@ -175,146 +218,7 @@ function clearArray(){
     arrTotals69 = []; arrTotals79 = []; arrTotals89 = []; arrTotals99 = []; arrTotals100 = [];
 }
 
-// (async () => {
-//
-//     fetch('ageDataByRegion.json')
-//         .then(response => {
-//             if (!response.ok) {
-//                 throw new Error(`JSON error`);
-//             }
-//             return response.json();
-//         })
-//         .then(jsonData => {
-//             let jsondata = JSON.stringify(jsonData);
-//
-//             let jsondata2 = JSON.parse(jsondata);
-//
-//
-//             for (let i = 0; i < jsondata2.length; i++) {
-//                 if (Number(jsondata2[i].Age) < 10) {
-//                     arr09.push(jsondata2[i]);
-//                 } else if (Number(jsondata2[i].Age) >= 10 && Number(jsondata2[i].Age) < 20) {
-//                     arr19.push(jsondata2[i])
-//                 } else if (Number(jsondata2[i].Age) >= 20 && Number(jsondata2[i].Age) < 30) {
-//                     arr29.push(jsondata2[i])
-//                 } else if (Number(jsondata2[i].Age) >= 30 && Number(jsondata2[i].Age) < 40) {
-//                     arr39.push(jsondata2[i])
-//                 } else if (Number(jsondata2[i].Age) >= 40 && Number(jsondata2[i].Age) < 50) {
-//                     arr49.push(jsondata2[i])
-//                 } else if (Number(jsondata2[i].Age) >= 50 && Number(jsondata2[i].Age) < 60) {
-//                     arr59.push(jsondata2[i])
-//                 } else if (Number(jsondata2[i].Age) >= 60 && Number(jsondata2[i].Age) < 70) {
-//                     arr69.push(jsondata2[i])
-//                 } else if (Number(jsondata2[i].Age) >= 70 && Number(jsondata2[i].Age) < 80) {
-//                     arr79.push(jsondata2[i])
-//                 } else if (Number(jsondata2[i].Age) >= 80 && Number(jsondata2[i].Age) < 90) {
-//                     arr89.push(jsondata2[i])
-//                 } else if (Number(jsondata2[i].Age) >= 90 && Number(jsondata2[i].Age) < 100) {
-//                     arr99.push(jsondata2[i])
-//                 } else {
-//                     arr100.push(jsondata2[i])
-//                 }
-//
-//             }
-//
-//             arrAgeSplit(arr09, 9);
-//             arrAgeSplit(arr19, 19);
-//             arrAgeSplit(arr29, 29);
-//             arrAgeSplit(arr39, 39);
-//             arrAgeSplit(arr49, 49);
-//             arrAgeSplit(arr59, 59);
-//             arrAgeSplit(arr69, 69);
-//             arrAgeSplit(arr79, 79);
-//             arrAgeSplit(arr89, 89);
-//             arrAgeSplit(arr99, 99);
-//             arrAgeSplit(arr100, 100);
-//
-//             // console.log("arrtotals for selected array")
-//             // console.log(arrTotals9)
-//         })
-//
-//
-//
-//
-//     const topology = await fetch(
-//         'https://code.highcharts.com/mapdata/countries/gb/gb-all.topo.json'
-//     ).then(response => response.json());
-//
-//
-//     let data = pushToArray(arraySelected)
-//
-//     // Current data category of age
-//     // let data = [[]]
-//     //
-//     // for (let i = 0; i < arrTotals9.length; i++){
-//     //     console.log("")
-//     //     data.push([arrTotals9[i].name, arrTotals9[i].qty]);
-//     // }
-//     //
-//     // console.log(data);
-//
-//
-//
-//
-//
-//     // Create the chart
-//     Highcharts.mapChart('mapContainer', {
-//         chart: {
-//             map: topology,
-//             height: '40%'
-//         },
-//
-//         title: {
-//             text: 'Highcharts Maps basic demo'
-//         },
-//
-//         subtitle: {
-//             text: 'Source map: <a href="https://code.highcharts.com/mapdata/countries/gb/gb-all.topo.json">United Kingdom</a>'
-//         },
-//
-//         mapNavigation: {
-//             enabled: true,
-//             buttonOptions: {
-//                 verticalAlign: 'bottom'
-//             }
-//         },
-//
-//
-//         colorAxis: {
-//             max: 1000,
-//             type: 'linear',
-//             width: '50%'
-//         },
-//
-//         legend: {
-//             borderWidth: 1,
-//
-//
-//             title: {
-//                 width: 500,
-//                 text: 'People per km²'
-//             }
-//         },
-//
-//         series: [{
-//             data: data,
-//             name: 'People per KM/2',
-//             tooltip: {
-//                 valueSuffix: '/km²'
-//             },
-//             states: {
-//                 hover: {
-//                     color: '#BADA55'
-//                 }
-//             },
-//             dataLabels: {
-//                 enabled: true,
-//                 format: '{point.name}'
-//             }
-//         }]
-//     });
-//
-// })();
+
 
 function changeCategory(number){
     console.log("clicked")
@@ -464,6 +368,22 @@ function arrAgeSplit(arrName, maxAge){
             )
         }
     }
+}
 
+
+// This function processes a cookie
+function getCookie(text){
+    // Splits the cookie string using the standard cookie separator ";"
+    const splitCookie = document.cookie.split(";");
+
+    // Cookies are now in format name = 'name'
+    // For each splitCookie, further split on the '=' and set each
+    // side to a key / value pair in a map
+    const cookieMap = new Map();
+    for (let i = 0; i < splitCookie.length; i++){
+        cookieMap.set(splitCookie[i].trim().split('=')[0],
+            splitCookie[i].trim().split('=')[1]);
+    }
+    return cookieMap.get(text);
 }
 
