@@ -8,12 +8,11 @@ let arrTotals89 = []; let arrTotals99 = []; let arrTotals100 = [];
 
 let arraySelected = arrTotals9;
 
-
-async function createMap(){
-
+let clickedButton = 1;
 
 
-
+// Default title set to Ages 0-9
+async function createMap(title = 'Ages 0-9'){
 
     fetch('ageDataByRegion.json')
         .then(response => {
@@ -28,9 +27,6 @@ async function createMap(){
             let jsondata = JSON.stringify(jsonData);
 
             let jsondata2 = JSON.parse(jsondata);
-
-
-
 
             for (let i = 0; i < jsondata2.length; i++) {
                 if (Number(jsondata2[i].Age) < 10) {
@@ -53,7 +49,7 @@ async function createMap(){
                     arr89.push(jsondata2[i])
                 } else if (Number(jsondata2[i].Age) >= 90 && Number(jsondata2[i].Age) < 100) {
                     arr99.push(jsondata2[i])
-                } else {
+                } else if (Number(jsondata2[i].Age) === 100) {
                     arr100.push(jsondata2[i])
                 }
 
@@ -70,41 +66,41 @@ async function createMap(){
             arrAgeSplit(arr89, 89);
             arrAgeSplit(arr99, 99);
             arrAgeSplit(arr100, 100);
-
-            // console.log("arrtotals for selected array")
-            // console.log(arrTotals9)
         })
-
-
-
 
     const topology = await fetch(
         'https://code.highcharts.com/mapdata/countries/gb/gb-all.topo.json'
     ).then(response => response.json());
 
-
-    console.log("arr selected")
-    console.log(arraySelected)
-
     let data = pushToArray(arraySelected)
 
-    console.log("data")
-    console.log(data)
 
 
     // Create the chart
     Highcharts.mapChart('mapContainer', {
         chart: {
             map: topology,
-            height: '40%'
+            height: '52%'
         },
 
         title: {
-            text: 'Highcharts Maps basic demo'
+            text: "England and Wales Population Density Map:" + `<b style='color: blue'> ${title}</b>`,
+
+            style:{
+                fontSize: 30,
+            }
         },
 
         subtitle: {
-            text: 'Source map: <a href="https://code.highcharts.com/mapdata/countries/gb/gb-all.topo.json">United Kingdom</a>'
+            text: 'Source data: England and Wales Census 2021',
+
+            style:{
+                fontSize: 20
+            }
+        },
+
+        subsubTitle: {
+            text: "data"
         },
 
         mapNavigation: {
@@ -116,32 +112,78 @@ async function createMap(){
 
         mapView: {
             center: [-3, 52.7],
-            zoom: 7.3
+            zoom: 7.65
         },
 
+        colors: [
+            'rgba(218,222,255)',
+            'rgba(188, 192, 255)',
+            'rgba(158, 162, 255)',
+            'rgba(121, 132, 255)',
+            'rgba(91, 102, 255)',
+            'rgba(71, 82, 255)',
+            'rgba(1, 35, 255)'
+        ],
 
         colorAxis: {
-            max: 1000,
-            type: 'linear',
-            width: '50%'
+            dataClassColor: 'category',
+            dataClasses: [{
+                to: 5
+            }, {
+                from: 5,
+                to: 25
+            }, {
+                from: 25,
+                to: 100
+            }, {
+                from: 100,
+                to: 300
+            }, {
+                from: 300,
+                to: 500
+            }, {
+                from: 500,
+                to: 1000
+            }, {
+                from: 1000
+            }]
         },
 
         legend: {
-            borderWidth: 1,
+            borderWidth: 0.25,
 
+            // Legend categories font size
+            itemStyle:{
+                margin: 20,
+                fontSize: 18
+            },
+
+            // width between each legend category
+            itemWidth: 150,
 
             title: {
-                width: 500,
-                text: 'People per km²'
+                text: 'People per km²',
+
+                // Legend title size
+                style:{
+                    fontSize: 18
+                }
+            }
+        },
+
+        // Formats the mouseover tooltip to ensure an accessible font size used
+        tooltip: {
+            formatter: function () {
+                return `<b style="font-size: 18px; ">${this.key}:</b> <br> <p style="font-size: 18px">${this.value} People per km²</p>`;
             }
         },
 
         series: [{
             data: data,
-            format: '{data.name}',
-            name: 'People per KM/2',
+
             tooltip: {
-                valueSuffix: '/km²'
+                valueDecimals: 2,
+                valueSuffix: '/km²',
             },
             states: {
                 hover: {
@@ -150,8 +192,15 @@ async function createMap(){
             },
             dataLabels: {
                 enabled: true,
-                format: '{point.name}'
+
+                // Formats chart to only return labels for counties that exist in data (england and wales data)
+                formatter: function(){
+                    if(this.point.value !== null){
+                        return this.point.name;
+                    }
+                }
             },
+
             trackByArea: true,
             events: {
                 click: function(event){
@@ -159,6 +208,7 @@ async function createMap(){
                     console.log("point");
                     for(let i = 0; i < data.length; i++){
 
+                        // When an area of the map is clicked, navigate to a new page containing focused data
                         if (event.point.value === data[i][1]){
                             console.log(event.point.value + ' matches with: ' + data[i][0]);
                             document.cookie = `clickedMapCode = ${data[i][0]}; expires = `;
@@ -202,8 +252,6 @@ function createRegionCharts(){
                 }
             }
 
-
-            console.log(countyData)
         })
 }
 
@@ -220,13 +268,16 @@ function clearArray(){
 
 
 
-function changeCategory(number){
-    console.log("clicked")
-
+function changeCategory(number, text, id){
+    // first change selected button
+    let activeButton = document.getElementById(`ageBtn${clickedButton}`)
+    activeButton.classList.remove('active');
+    clickedButton = id;
+    activeButton = document.getElementById(`ageBtn${clickedButton}`);
+    activeButton.classList.add('active');
 
     arraySelected = number;
-
-    createMap(arraySelected);
+    createMap(text);
 }
 
 function pushToArray(array){
@@ -236,11 +287,8 @@ function pushToArray(array){
     let data = [[]]
 
     for (let i = 0; i < array.length; i++){
-        // console.log("")
         data.push([array[i].name, array[i].qty]);
     }
-
-    console.log(data);
 
     return data;
 
@@ -324,12 +372,11 @@ function getAreaData(locationCode){
 // e.g. 0-9, 10-19, etc
 function arrAgeSplit(arrName, maxAge){
     // For all but the age 100 array
-    if(maxAge !== 100){
+    // if(maxAge !== 100){
         let recordCount = 0;
         let valueCount = 0;
 
         for (let i = 0; i < arrName.length; i++) {
-            // console.log(arrName[i])
 
             recordCount = recordCount + 1;
 
@@ -339,18 +386,9 @@ function arrAgeSplit(arrName, maxAge){
             } else if (recordCount === 10) {
                 valueCount = valueCount + Number(arrName[i].Observation);
 
-                // MAYBE DIVIDE BY SQUARE MILES - SOMETHING LIKE THIS
-
-                // if (arrName[i].Location === 'gb-nf'){
-                //     eval('arrTotals' + maxAge).push(
-                //         {name: arrName[i].Location, qty: (valueCount/2074)}
-                //     )
-                // }
-
                 let area = getAreaData(arrName[i].Location);
-                // console.log("Area for this one is:")
-                // console.log(area);
 
+                // Divide count by the region area
                 eval('arrTotals' + maxAge).push(
                     {name: arrName[i].Location, qty: (Math.round((valueCount / area) * 100)/100)}
                 )
@@ -361,13 +399,13 @@ function arrAgeSplit(arrName, maxAge){
         }
 
         // For the age 100+ array
-    } else {
+    /*} else {
         for (let i = 0; i < arrName.length; i++) {
             arrTotals100.push(
                 {name: arrName[i].Location, qty: arrName[i].Observation}
             )
         }
-    }
+    }*/
 }
 
 
