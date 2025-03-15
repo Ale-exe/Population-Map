@@ -1,0 +1,17 @@
+h1{
+    font-family: sans-serif;
+    text-align: center;
+    font-size: 60px;
+}
+
+#countyMainContent {
+    /*display: flex;*/
+}
+
+.chartRow{
+    display: flex;
+}
+
+.chart{
+    width: 50%;
+}

@@ -74,6 +74,7 @@ async function createMap(title = 'Ages 0-9'){
 
     let data = pushToArray(arraySelected)
 
+    console.log(data)
 
 
     // Create the chart
@@ -92,7 +93,8 @@ async function createMap(title = 'Ages 0-9'){
         },
 
         subtitle: {
-            text: 'Source data: England and Wales Census 2021',
+            text: 'Source: <a target="_blank" ' +
+                'href="https://statistics.ukdataservice.ac.uk/dataset/ons_2021_demography_age_single_year">England and Wales Census 2021</a>',
 
             style:{
                 fontSize: 20
@@ -212,6 +214,7 @@ async function createMap(title = 'Ages 0-9'){
                         if (event.point.value === data[i][1]){
                             console.log(event.point.value + ' matches with: ' + data[i][0]);
                             document.cookie = `clickedMapCode = ${data[i][0]}; expires = `;
+                            document.cookie = `clickedMapName = ${event.point.name}; expires = `;
                             console.log(getCookie('clickedMapCode'));
                             window.location.href='regionCharts.html';
                         }
@@ -223,37 +226,7 @@ async function createMap(title = 'Ages 0-9'){
 
 }
 
-// For displaying detailed broken down charts on region page
-function createRegionCharts(){
 
-    let countyData = []
-
-    console.log(getCookie('clickedMapCode'));
-
-
-    fetch('ageDataByRegion.json')
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(`JSON error`);
-            }
-            return response.json();
-        })
-        .then(jsonData => {
-
-            let jsondata = JSON.stringify(jsonData);
-
-            let jsondata2 = JSON.parse(jsondata);
-
-            for (let i = 0; i < jsondata2.length; i++) {
-
-                if (jsondata2[i].Location === getCookie('clickedMapCode')) {
-                    countyData.push(jsondata2[i]);
-
-                }
-            }
-
-        })
-}
 
 
 

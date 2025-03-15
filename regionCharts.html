@@ -4,15 +4,38 @@
     <script src="https://code.highcharts.com/maps/highmaps.js"></script>
     <script src="https://code.highcharts.com/maps/modules/exporting.js"></script>
     <script src="mapSetup.js" type="text/javascript" defer></script>
-    <link rel="stylesheet" href="mapStyles.css" type="text/css"/>
+    <script src="countyMapSetup.js" type="text/javascript" defer></script>
+    <link rel="stylesheet" href="countyMapStyles.css" type="text/css"/>
     <script src="https://cdn.jsdelivr.net/npm/exceljs@4.4.0/dist/exceljs.min.js"></script>
+    <script src='http://code.jquery.com/jquery-3.6.3.js'></script>
+
 
     <meta charset="UTF-8">
-    <title>Vis</title>
+    <title>County View</title>
 </head>
 <body onload="createRegionCharts()">
 
 <button onclick="window.location.href='dashboard.html'">Return</button>
+
+<h1 id="regionHeading">Region: <span id="region" style="color: blue">Placeholder</span> </h1>
+
+<div id="countyMainContent" style="background-color: antiquewhite">
+
+
+    <div id="chartRow1" class="chartRow" style="background-color: bisque">
+        <div id="chart1" class="chart" style="background-color: aqua">    </div>
+        <div id="chart2" class="chart" style="background-color: aqua">    </div>
+    </div>
+
+    <div id="chartRow2" class="chartRow" style="background-color: bisque">
+        <div id="chart3" class="chart" style="background-color: aqua">    </div>
+        <div id="chart4" class="chart" style="background-color: aqua">    </div>
+    </div>
+
+
+
+</div>
+
 
 <div id="mapContainer"></div>
 
