@@ -28,9 +28,6 @@ function createRegionCharts(){
                 }
             }
 
-            console.log(countyData)
-
-
 
             let recordCount = 0;
             let valueCount = 0;
@@ -55,9 +52,6 @@ function createRegionCharts(){
             }
             // For those age 100+
             countyAgeCat.push({x: '100+', y: Number(countyData[countyData.length-1].Observation)});
-
-                console.log(countyAgeCat)
-
 
 
 
@@ -122,10 +116,6 @@ function createRegionCharts(){
                     }
 
                     prevCountyAgeCat.push({x: '100+', y: Number(prevCountyData[prevCountyData.length-1].qty)});
-
-
-                    console.log(prevCountyAgeCat);
-
 
 
 
@@ -208,51 +198,195 @@ function createRegionCharts(){
 
 
                     // ---------------------------------------------------------------------------------------------------------------------------------------
+                    let cleanedGenderData = [];
+
+                    fetch('2021GenderDataByRegion.json')
+                        .then(response => {
+                            if (!response.ok) {
+                                throw new Error(`JSON error`);
+                            }
+                            return response.json();
+                        })
+                        .then(jsonData => {
+
+                            let jsondata = JSON.stringify(jsonData);
+
+                            let rawGenderData = JSON.parse(jsondata);
+
+
+
+                            let first = [0,0,'']; let second = [0,0,'']; let third = [0,0,''];
+                            let fourth = [0,0,'']; let fifth = [0,0,'']; let sixth = [0,0,''];
+                            let final = [0,0,''];
+
+                            for (let i =0; i < rawGenderData.length; i++){
+
+                                if (rawGenderData[i].area === getCookie('clickedMapName')){
+                                    console.log(rawGenderData[i])
+
+
+                                    if (rawGenderData[i].ageCat === 'Aged 16 to 24 years'){
+                                        if (rawGenderData[i].gender === 'Female'){
+                                            first[0] += Number(rawGenderData[i].Observation);
+                                            first[2] = rawGenderData[i].area;
+                                        } else {
+                                            first[1] += Number(rawGenderData[i].Observation);
+                                            first[2] = rawGenderData[i].area;
+                                        }
+                                    } else if (rawGenderData[i].ageCat === 'Aged 25 to 34 years'){
+                                        if (rawGenderData[i].gender === 'Female'){
+                                            second[0] += Number(rawGenderData[i].Observation);
+                                            second[2] = rawGenderData[i].area;
+                                        } else {
+                                            second[1] += Number(rawGenderData[i].Observation);
+                                            second[2] = rawGenderData[i].area;
+                                        }
+                                    } else if (rawGenderData[i].ageCat === 'Aged 35 to 44 years') {
+                                        if (rawGenderData[i].gender === 'Female') {
+                                            third[0] += Number(rawGenderData[i].Observation);
+                                            third[2] = rawGenderData[i].area;
+                                        } else {
+                                            third[1] += Number(rawGenderData[i].Observation);
+                                            third[2] = rawGenderData[i].area;
+                                        }
+                                    } else if (rawGenderData[i].ageCat === 'Aged 45 to 54 years') {
+                                        if (rawGenderData[i].gender === 'Female') {
+                                            fourth[0] += Number(rawGenderData[i].Observation);
+                                            fourth[2] = rawGenderData[i].area;
+                                        } else {
+                                            fourth[1] += Number(rawGenderData[i].Observation);
+                                            fourth[2] = rawGenderData[i].area;
+                                        }
+                                    } else if (rawGenderData[i].ageCat === 'Aged 55 to 64 years') {
+                                        if (rawGenderData[i].gender === 'Female') {
+                                            fifth[0] += Number(rawGenderData[i].Observation);
+                                            fifth[2] = rawGenderData[i].area;
+                                        } else {
+                                            fifth[1] += Number(rawGenderData[i].Observation);
+                                            fifth[2] = rawGenderData[i].area;
+                                        }
+                                    } else if (rawGenderData[i].ageCat === 'Aged 65 to 74 years') {
+                                        if (rawGenderData[i].gender === 'Female') {
+                                            sixth[0] += Number(rawGenderData[i].Observation);
+                                            sixth[2] = rawGenderData[i].area;
+                                        } else {
+                                            sixth[1] += Number(rawGenderData[i].Observation);
+                                            sixth[2] = rawGenderData[i].area;
+                                        }
+                                    } else if (rawGenderData[i].ageCat === 'Aged 75 years and over') {
+                                        if (rawGenderData[i].gender === 'Female') {
+                                            final[0] += Number(rawGenderData[i].Observation);
+                                            final[2] = rawGenderData[i].area;
+                                        } else {
+                                            final[1] += Number(rawGenderData[i].Observation);
+                                            final[2] = rawGenderData[i].area;
+                                        }
+                                    }
+                                }
+                            }
+                            cleanedGenderData.push({area:first[2], age: '16-24', male: first[1], female: first[0]});
+                            cleanedGenderData.push({area:second[2], age: '25-34', male: second[1], female: second[0]});
+                            cleanedGenderData.push({area:third[2], age: '35-44', male: third[1], female: third[0]});
+                            cleanedGenderData.push({area:fourth[2], age: '45-54', male: fourth[1], female: fourth[0]});
+                            cleanedGenderData.push({area:fifth[2], age: '55-64', male: fifth[1], female: fifth[0]});
+                            cleanedGenderData.push({area:sixth[2], age: '65-74', male: sixth[1], female: sixth[0]});
+                            cleanedGenderData.push({area:final[2], age: '75+', male: final[1], female: final[0]});
+
+                            console.log(cleanedGenderData)
+
+
+
+                            Highcharts.Templating.helpers.abs = value => Math.abs(value);
+
+                            const categories = [
+                                '16-24', '25-34', '35-44', '45-54', '55-64', '65-74', '75+'
+                            ];
+
+
                     Highcharts.chart('chart2', {
                         chart: {
-                            type: 'column'
+                            type: 'bar'
                         },
                         title: {
-                            text: 'Corn vs wheat estimated production for 2023'
+                            text: 'Population pyramid for Andorra, 2023'
                         },
                         subtitle: {
-                            text:
-                                'Source: <a target="_blank" ' +
-                                'href="https://www.indexmundi.com/agriculture/?commodity=corn">indexmundi</a>'
+                            text: 'Source: <a ' +
+                                'href="https://countryeconomy.com/demography/population-structure/andorra"' +
+                                'target="_blank">countryeconomy.com</a>'
                         },
-                        xAxis: {
-                            categories: ['USA', 'China', 'Brazil', 'EU', 'Argentina', 'India'],
-                            crosshair: true,
-                            accessibility: {
-                                description: 'Countries'
+                        accessibility: {
+                            point: {
+                                valueDescriptionFormat: '{index}. Age {xDescription}, {value}%.'
                             }
                         },
-                        yAxis: {
-                            min: 0,
-                            title: {
-                                text: '1000 metric tons (MT)'
-                            }
-                        },
-                        tooltip: {
-                            valueSuffix: ' (1000 MT)'
-                        },
-                        plotOptions: {
-                            column: {
-                                pointPadding: 0.2,
-                                borderWidth: 0
-                            }
-                        },
-                        series: [
-                            {
-                                name: 'Corn',
-                                data: [387749, 280000, 129000, 64300, 54000, 34300]
+                        xAxis: [{
+                            categories: categories,
+                            reversed: false,
+                            labels: {
+                                step: 1
                             },
-                            {
-                                name: 'Wheat',
-                                data: [45321, 140000, 10000, 140500, 19500, 113500]
+                            accessibility: {
+                                description: 'Age (male)'
                             }
-                        ]
+                        }, { // mirror axis on right side
+                            opposite: true,
+                            reversed: false,
+                            categories: categories,
+                            linkedTo: 0,
+                            labels: {
+                                step: 1
+                            },
+                            accessibility: {
+                                description: 'Age (female)'
+                            }
+                        }],
+                        yAxis: {
+                            title: {
+                                text: null
+                            },
+                            labels: {
+                                format: '{abs value}'
+                            },
+                            accessibility: {
+                                description: 'Percentage population',
+                                rangeDescription: 'Range: 0 to 5%'
+                            }
+                        },
+
+                        plotOptions: {
+                            series: {
+                                pointPadding: -0.1,
+                                stacking: 'normal',
+                            }
+                        },
+
+                        tooltip: {
+                            format: '<b>{series.name}, age {point.category}</b><br/>' +
+                                'Population: {(abs point.y):.2f}%'
+                        },
+
+                        series: [{
+                            name: 'Male',
+                            data: [
+                                -cleanedGenderData[0].male, -cleanedGenderData[1].male, -cleanedGenderData[2].male,
+                                -cleanedGenderData[3].male, -cleanedGenderData[4].male, -cleanedGenderData[5].male,
+                                -cleanedGenderData[6].male
+
+                            ]
+                        }, {
+                            name: 'Female',
+                            data: [
+                                cleanedGenderData[0].female, cleanedGenderData[1].female, cleanedGenderData[2].female,
+                                cleanedGenderData[3].female, cleanedGenderData[4].female, cleanedGenderData[5].female,
+                                cleanedGenderData[6].female
+
+                            ]
+                        }]
                     });
+
+                        })
+
 
 
                     // ---------------------------------------------------------------------------------------------------------------------------------------
