@@ -5,13 +5,18 @@ h1{
 }
 
 #countyMainContent {
-    /*display: flex;*/
+    padding: 0.125%;
+    background-color: lightsteelblue;
 }
 
 .chartRow{
     display: flex;
+    padding-bottom: 0.125%;
+    padding-top: 0.125%;
 }
 
 .chart{
     width: 50%;
+    padding-left: 0.125%;
+    padding-right: 0.125%;
 }

@@ -28,7 +28,6 @@ function createRegionCharts(){
                 }
             }
 
-
             let recordCount = 0;
             let valueCount = 0;
 
@@ -55,6 +54,7 @@ function createRegionCharts(){
 
 
 
+
             fetch('2016ageDataByRegion.json')
                 .then(response => {
                     if (!response.ok) {
@@ -70,6 +70,8 @@ function createRegionCharts(){
 
                     let prevCountyData = [];
                     let prevCountyAgeCat = [];
+
+                    console.log(prevCensusData)
 
 
                     // push 2016 census data into prevCountyData in the format {age:x, quantity:y}
@@ -124,7 +126,11 @@ function createRegionCharts(){
                             type: 'column'
                         },
                         title: {
-                            text: '2021/2011 Census Age Breakdown Comparison '
+                            text: `2021 vs 2011 Census Population in by Age Group - ${getCookie('clickedMapName')}`,
+
+                            style:{
+                                fontSize: 22,
+                            }
                         },
                         subtitle: {
                             text:
@@ -140,21 +146,46 @@ function createRegionCharts(){
                                 description: 'Countries'
                             },
                             title: {
-                                text: 'Age Categories'
+                                text: 'Age Categories',
+                                margin: 10,
+                                style:{
+                                    fontSize: 16,
+                                    fontWeight: 'bold',
+                                }
                             }
                         },
                         yAxis: {
 
                             min: 0,
                             title: {
-                                text: 'Number of People'
+                                text: 'Number of Population',
+
+                                style:{
+                                    fontSize: 16,
+                                    fontWeight: 'bold',
+                                }
+                            },
+
+                            labels: {
+                                step: 1,
+
+                                style: {
+                                    fontSize: 15,
+                                },
                             }
                         },
+
+                        legend: {
+                            margin: 0,
+                            x: 34,
+                        },
+
                         tooltip: {
-                            valueSuffix: ' People',
-                            headerFormat: "something",
+                            format: "<b>Age Category: {point.category}</b><br> <span style=\"color:{point.series.color}\">\u25CF</span> {series.name}: Population: {point.y}",
+
                             style:{
-                              fontSize: 18
+                              fontSize: 18,
+                                fontWeight: 'normal',
                             },
                         },
                         plotOptions: {
@@ -213,7 +244,7 @@ function createRegionCharts(){
 
                             let rawGenderData = JSON.parse(jsondata);
 
-
+                            console.log(rawGenderData)
 
                             let first = [0,0,'']; let second = [0,0,'']; let third = [0,0,''];
                             let fourth = [0,0,'']; let fifth = [0,0,'']; let sixth = [0,0,''];
@@ -222,6 +253,7 @@ function createRegionCharts(){
                             for (let i =0; i < rawGenderData.length; i++){
 
                                 if (rawGenderData[i].area === getCookie('clickedMapName')){
+                                    console.log("here")
                                     console.log(rawGenderData[i])
 
 
@@ -305,15 +337,19 @@ function createRegionCharts(){
 
                     Highcharts.chart('chart2', {
                         chart: {
-                            type: 'bar'
+                            type: 'bar',
                         },
                         title: {
-                            text: 'Population pyramid for Andorra, 2023'
+                            text: `2021 Census Population Gender Split - ${getCookie('clickedMapName')}`,
+
+                            style:{
+                                fontSize: 22,
+                            }
                         },
                         subtitle: {
                             text: 'Source: <a ' +
-                                'href="https://countryeconomy.com/demography/population-structure/andorra"' +
-                                'target="_blank">countryeconomy.com</a>'
+                                'href="https://statistics.ukdataservice.ac.uk/dataset/england-and-wales-census-2021-rm163-gender-identity-by-age-by-sex"' +
+                                'target="_blank">England and Wales Census 2021 - Gender identity by age by sex</a>'
                         },
                         accessibility: {
                             point: {
@@ -323,19 +359,43 @@ function createRegionCharts(){
                         xAxis: [{
                             categories: categories,
                             reversed: false,
+                            title: {
+                                text: 'Age Categories',
+
+                                style:{
+                                    fontSize: 16,
+                                    fontWeight: 'bold',
+                                }
+                            },
                             labels: {
-                                step: 1
+                                step: 1,
+
+                                style:{
+                                    fontSize: 15,
+                                }
                             },
                             accessibility: {
                                 description: 'Age (male)'
                             }
                         }, { // mirror axis on right side
+                            title: {
+                                text: 'Age Categories',
+
+                                style:{
+                                    fontSize: 16,
+                                    fontWeight: 'bold',
+                                }
+                            },
                             opposite: true,
                             reversed: false,
                             categories: categories,
                             linkedTo: 0,
                             labels: {
-                                step: 1
+                                step: 1,
+
+                                style:{
+                                    fontSize: 15,
+                                }
                             },
                             accessibility: {
                                 description: 'Age (female)'
@@ -343,15 +403,28 @@ function createRegionCharts(){
                         }],
                         yAxis: {
                             title: {
-                                text: null
+                                text: 'Number of population',
+                                margin: 10,
+                                style:{
+                                    fontSize: 16,
+                                    fontWeight: 'bold',
+                                }
                             },
                             labels: {
-                                format: '{abs value}'
+                                format: '{abs value}',
+
+                                style:{
+                                    fontSize: 13,
+                                }
                             },
                             accessibility: {
                                 description: 'Percentage population',
                                 rangeDescription: 'Range: 0 to 5%'
                             }
+                        },
+
+                        legend: {
+                            margin: 0,
                         },
 
                         plotOptions: {
@@ -362,8 +435,12 @@ function createRegionCharts(){
                         },
 
                         tooltip: {
-                            format: '<b>{series.name}, age {point.category}</b><br/>' +
-                                'Population: {(abs point.y):.2f}%'
+                            format: '<b>{series.name}s: Age {point.category}</b><br/>' +
+                                'Population: {(abs point.y)}',
+
+                            style:{
+                                fontSize: 18
+                            },
                         },
 
                         series: [{
