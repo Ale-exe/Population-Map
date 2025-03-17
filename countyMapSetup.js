@@ -332,7 +332,7 @@ function createRegionCharts(){
                             type: 'bar',
                         },
                         title: {
-                            text: `2021 Census Population Gender Split - ${getCookie('clickedMapName')}`,
+                            text: `2021 Census Population Gender Split by Age Group - ${getCookie('clickedMapName')}`,
 
                             style:{
                                 fontSize: 22,
