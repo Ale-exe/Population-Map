@@ -3889,7 +3889,7 @@
     },
     {
         "date": "2011",
-        "geography": "Kingston upon Hull, City of",
+        "geography": "Kingston upon Hull",
         "geography code": "E06000010",
         "Rural Urban": "Total",
         "Age: All categories: Age; measures: Value": "256406",
@@ -14905,7 +14905,7 @@
     },
     {
         "date": "2011",
-        "geography": "Bristol, City of",
+        "geography": "Bristol",
         "geography code": "E06000023",
         "Rural Urban": "Total",
         "Age: All categories: Age; measures: Value": "428234",

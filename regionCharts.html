@@ -9,16 +9,21 @@
     <link rel="stylesheet" href="countyMapStyles.css" type="text/css"/>
     <script src="https://cdn.jsdelivr.net/npm/exceljs@4.4.0/dist/exceljs.min.js"></script>
     <script src='http://code.jquery.com/jquery-3.6.3.js'></script>
-
-
     <meta charset="UTF-8">
     <title>County View</title>
 </head>
 <body onload="createRegionCharts()">
 
-<button onclick="window.location.href='dashboard.html'">Return</button>
 
-<h1 id="regionHeading">Region: <span id="region" style="color: blue">Placeholder</span> </h1>
+<div style="display: flex">
+    <div id="returnToMap" onclick="window.location.href='dashboard.html'">
+        <h1>Return to Map</h1>
+    </div>
+
+    <div id="regionHeadingBox">
+        <h1 id="regionHeading">Region: <span id="region" style="color: blue">Placeholder</span> </h1>
+    </div>
+</div>
 
 <div id="countyMainContent">
 

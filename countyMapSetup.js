@@ -120,7 +120,7 @@ function createRegionCharts(){
 
 
 
-                    Highcharts.chart('chart1', {
+                    Highcharts.chart('chart3', {
                         chart: {
                             type: 'column'
                         },
@@ -157,7 +157,7 @@ function createRegionCharts(){
 
                             min: 0,
                             title: {
-                                text: 'Number of Population',
+                                text: 'Individuals Residing',
 
                                 style:{
                                     fontSize: 16,
@@ -395,7 +395,7 @@ function createRegionCharts(){
                         }],
                         yAxis: {
                             title: {
-                                text: 'Number of population',
+                                text: 'Individuals Residing',
                                 margin: 10,
                                 style:{
                                     fontSize: 16,
@@ -477,53 +477,61 @@ function createRegionCharts(){
 
                             let rawIdentityData = JSON.parse(identData);
 
-                            console.log("identity")
-                            console.log(rawIdentityData);
 
-                            for (let i =0; i < rawIdentityData.length; i++){
-                                if (getCookie('clickedMapName') === rawIdentityData[i].area){
+                            for (let i = 0; i < rawIdentityData.length; i++) {
+                                if (getCookie('clickedMapName') === rawIdentityData[i].area) {
 
-                                    // console.log(rawIdentityData[i].identityCat)
-                                    if(rawIdentityData[i].identityCat === '1'){
-                                        identityData[Number(rawIdentityData[i].identityCat)-1].qty += Number(rawIdentityData[i].observation);
-                                    } else if(rawIdentityData[i].identityCat === '2'){
-                                        identityData[Number(rawIdentityData[i].identityCat)-1].qty += Number(rawIdentityData[i].observation);
-                                    } else if(rawIdentityData[i].identityCat === '3'){
-                                        identityData[Number(rawIdentityData[i].identityCat)-1].qty += Number(rawIdentityData[i].observation);
-                                    } else if(rawIdentityData[i].identityCat === '4'){
-                                        identityData[Number(rawIdentityData[i].identityCat)-1].qty += Number(rawIdentityData[i].observation);
-                                    } else if(rawIdentityData[i].identityCat === '5'){
-                                        identityData[Number(rawIdentityData[i].identityCat)-1].qty += Number(rawIdentityData[i].observation);
-                                    } else if(rawIdentityData[i].identityCat === '7'){
-                                        identityData[Number(rawIdentityData[i].identityCat)-2].qty += Number(rawIdentityData[i].observation);
+                                    if (rawIdentityData[i].identityCat === '1') {
+                                        identityData[Number(rawIdentityData[i].identityCat) - 1].qty += Number(rawIdentityData[i].observation);
+                                    } else if (rawIdentityData[i].identityCat === '2') {
+                                        identityData[Number(rawIdentityData[i].identityCat) - 1].qty += Number(rawIdentityData[i].observation);
+                                    } else if (rawIdentityData[i].identityCat === '3') {
+                                        identityData[Number(rawIdentityData[i].identityCat) - 1].qty += Number(rawIdentityData[i].observation);
+                                    } else if (rawIdentityData[i].identityCat === '4') {
+                                        identityData[Number(rawIdentityData[i].identityCat) - 1].qty += Number(rawIdentityData[i].observation);
+                                    } else if (rawIdentityData[i].identityCat === '5') {
+                                        identityData[Number(rawIdentityData[i].identityCat) - 1].qty += Number(rawIdentityData[i].observation);
+                                    } else if (rawIdentityData[i].identityCat === '7') {
+                                        identityData[Number(rawIdentityData[i].identityCat) - 2].qty += Number(rawIdentityData[i].observation);
                                     }
 
                                 }
                             }
-                            console.log(identityData)
 
 
-
-                            Highcharts.chart('chart3', {
+                            Highcharts.chart('chart4', {
                                 chart: {
-                                    type: 'variablepie'
+                                    type: 'pie'
                                 },
                                 title: {
-                                    text: 'Countries compared by population density and total area, 2024'
+                                    text: `2021 Census National Identity of Inhabitants - ${getCookie('clickedMapName')}`,
+                                    style: {
+                                        fontSize: 22
+                                    }
+                                },
+                                subtitle: {
+                                    text: 'Source: <a ' +
+                                        'href="https://statistics.ukdataservice.ac.uk/dataset/england-and-wales-census-2021-rm086-national-identity-by-age"' +
+                                        'target="_blank">England and Wales Census 2021 - National Identity by age</a>'
                                 },
                                 tooltip: {
                                     headerFormat: '',
                                     pointFormat: '<span style="color:{point.color}">\u25CF</span> <b> ' +
                                         '{point.name}</b><br/>' +
-                                        'Area (square km): <b>{point.y}</b><br/>' +
-                                        'Population density (people per square km): <b>{point.z}</b><br/>'
+                                        '<b>{point.percentage:.1f}</b>% of Population',
+                                    // 'Area (square km): <b>{point.y}</b><br/>' +
+                                    // 'Population density (people per square km): <b>{point.z}</b><br/>'
+
+                                    style: {
+                                        fontSize: 18
+                                    },
                                 },
                                 series: [{
                                     minPointSize: 10,
                                     innerSize: '20%',
                                     zMin: 0,
                                     name: 'countries',
-                                    borderRadius: 5,
+                                    borderRadius: 10,
                                     data: [{
                                         name: identityData[0].name,
                                         y: identityData[0].qty,
@@ -554,6 +562,12 @@ function createRegionCharts(){
                                         z: Math.cbrt(Number(identityData[5].qty)) / 10
 
                                     }],
+                                    dataLabels: {
+                                        style: {
+                                            fontSize: 16
+                                        }
+                                    },
+
                                     colors: [
                                         'rgba(71, 82, 255)',
                                         'rgba(91, 102, 255)',
@@ -566,54 +580,151 @@ function createRegionCharts(){
                             });
 
 
-
                             // ---------------------------------------------------------------------------------------------------------------------------------------
-                            Highcharts.chart('chart4', {
-                                chart: {
-                                    type: 'column'
-                                },
-                                title: {
-                                    text: 'Corn vs wheat estimated production for 2023'
-                                },
-                                subtitle: {
-                                    text:
-                                        'Source: <a target="_blank" ' +
-                                        'href="https://www.indexmundi.com/agriculture/?commodity=corn">indexmundi</a>'
-                                },
-                                xAxis: {
-                                    categories: ['USA', 'China', 'Brazil', 'EU', 'Argentina', 'India'],
-                                    crosshair: true,
-                                    accessibility: {
-                                        description: 'Countries'
-                                    }
-                                },
-                                yAxis: {
-                                    min: 0,
-                                    title: {
-                                        text: '1000 metric tons (MT)'
-                                    }
-                                },
-                                tooltip: {
-                                    valueSuffix: ' (1000 MT)'
-                                },
-                                plotOptions: {
-                                    column: {
-                                        pointPadding: 0.2,
-                                        borderWidth: 0
-                                    }
-                                },
-                                series: [
-                                    {
-                                        name: 'Corn',
-                                        data: [387749, 280000, 129000, 64300, 54000, 34300]
-                                    },
-                                    {
-                                        name: 'Wheat',
-                                        data: [45321, 140000, 10000, 140500, 19500, 113500]
-                                    }
-                                ]
-                            });
+                            let cleanedPopulationOverTime = [];
 
+                            fetch('10YearCountyPop.json')
+                                .then(response => {
+                                    if (!response.ok) {
+                                        throw new Error(`JSON error`);
+                                    }
+                                    return response.json();
+                                })
+                                .then(jsonData => {
+
+                                    let jsondata = JSON.stringify(jsonData);
+
+                                    let rawPopOverTime = JSON.parse(jsondata);
+
+                                    for (let i = 0; i< rawPopOverTime.length; i++){
+                                        if (getCookie('clickedMapName') === rawPopOverTime[i].area){
+
+                                            if (rawPopOverTime[i].sex === 'F'){
+                                                cleanedPopulationOverTime.push({sex:'F', date11:rawPopOverTime[i]['2011'], date12:rawPopOverTime[i]['2012'],
+                                                    date13:rawPopOverTime[i]['2013'], date14:rawPopOverTime[i]['2014'], date15:rawPopOverTime[i]['2015'],
+                                                    date16:rawPopOverTime[i]['2016'], date17:rawPopOverTime[i]['2017'], date18:rawPopOverTime[i]['2018'],
+                                                    date19:rawPopOverTime[i]['2019'], date20:rawPopOverTime[i]['2020'],
+                                                    date21:rawPopOverTime[i]['2021'], date22:rawPopOverTime[i]['2022'], date23:rawPopOverTime[i]['2023']})
+                                            } else {
+                                                cleanedPopulationOverTime.push({sex:'M', date11:rawPopOverTime[i]['2011'], date12:rawPopOverTime[i]['2012'],
+                                                    date13:rawPopOverTime[i]['2013'], date14:rawPopOverTime[i]['2014'], date15:rawPopOverTime[i]['2015'],
+                                                    date16:rawPopOverTime[i]['2016'], date17:rawPopOverTime[i]['2017'], date18:rawPopOverTime[i]['2018'],
+                                                    date19:rawPopOverTime[i]['2019'], date20:rawPopOverTime[i]['2020'],
+                                                    date21:rawPopOverTime[i]['2021'], date22:rawPopOverTime[i]['2022'], date23:rawPopOverTime[i]['2023']})
+                                            }
+                                        }
+                                    }
+                                    console.log(cleanedPopulationOverTime)
+
+
+
+                                    Highcharts.chart('chart1', {
+                                        title: {
+                                            text: `Population Change Over Time by Gender- ${getCookie('clickedMapName')}`,
+
+                                            style:{
+                                                fontSize: 22,
+                                            }
+                                        },
+                                        subtitle: {
+                                            text:
+                                                'Source: <a target="_blank" ' +
+                                                'href="https://www.ons.gov.uk/peoplepopulationandcommunity/populationandmigration/populationestimates/datasets/estimatesofthepopulationforenglandandwales">Office for National Statistics - Estimates of the population for England and Wales 2011-2023</a>'
+                                        },
+
+                                        yAxis: {
+                                            title: {
+                                                text: 'Individuals Residing',
+
+                                                style:{
+                                                    fontSize: 16,
+                                                    fontWeight: 'bold',
+                                                }
+                                            },
+                                            labels:{
+                                                style:{
+                                                    fontSize: 15,
+                                                }
+                                            }
+                                        },
+
+                                        xAxis: {
+                                            title:{
+                                                text: 'Year',
+                                                style:{
+                                                    fontSize: 16,
+                                                    fontWeight: 'bold',
+
+                                                }
+                                            },
+                                            categories: [
+                                                '2011', '2012', '2013', '2014', '2015', '2016', '2017', '2018', '2019',
+                                                '2020', '2021', '2022', '2023'
+                                            ],
+                                            accessibility: {
+                                                rangeDescription: 'Years: 2011 to 2023'
+                                            }
+                                        },
+
+                                        legend: {
+                                            layout: 'horizontal',
+                                            align: 'center',
+                                            verticalAlign: 'bottom',
+                                            margin: 0,
+                                            x: 34
+                                        },
+
+                                        plotOptions: {
+                                            series: {
+                                                label: {
+                                                    connectorAllowed: false
+                                                },
+                                            }
+                                        },
+
+                                        series: [{
+                                            name: 'Male',
+                                            data: [
+                                                Number(cleanedPopulationOverTime[1].date11), Number(cleanedPopulationOverTime[1].date12),
+                                                Number(cleanedPopulationOverTime[1].date13), Number(cleanedPopulationOverTime[1].date14),
+                                                Number(cleanedPopulationOverTime[1].date15), Number(cleanedPopulationOverTime[1].date16),
+                                                Number(cleanedPopulationOverTime[1].date17), Number(cleanedPopulationOverTime[1].date18),
+                                                Number(cleanedPopulationOverTime[1].date19), Number(cleanedPopulationOverTime[1].date20),
+                                                Number(cleanedPopulationOverTime[1].date21), Number(cleanedPopulationOverTime[1].date22),
+                                                Number(cleanedPopulationOverTime[1].date23)
+                                            ]
+                                        }, {
+                                            name: 'Female',
+                                            data: [
+                                                Number(cleanedPopulationOverTime[0].date11), Number(cleanedPopulationOverTime[0].date12),
+                                                Number(cleanedPopulationOverTime[0].date13), Number(cleanedPopulationOverTime[0].date14),
+                                                Number(cleanedPopulationOverTime[0].date15), Number(cleanedPopulationOverTime[0].date16),
+                                                Number(cleanedPopulationOverTime[0].date17), Number(cleanedPopulationOverTime[0].date18),
+                                                Number(cleanedPopulationOverTime[0].date19), Number(cleanedPopulationOverTime[0].date20),
+                                                Number(cleanedPopulationOverTime[0].date21), Number(cleanedPopulationOverTime[0].date22),
+                                                Number(cleanedPopulationOverTime[0].date23)
+                                            ]
+                                        }, ],
+
+                                        responsive: {
+                                            rules: [{
+                                                condition: {
+                                                    maxWidth: 500
+                                                },
+                                                chartOptions: {
+                                                    legend: {
+                                                        layout: 'horizontal',
+                                                        align: 'center',
+                                                        verticalAlign: 'bottom',
+                                                    }
+                                                }
+
+                                            }]
+                                        }
+
+                                    });
+
+                                })
                         })
                 })
         })

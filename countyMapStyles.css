@@ -1,8 +1,24 @@
-h1{
+#returnToMap{
+    background-color: skyblue;
+    border-left-style: solid;
+    border-top-style: solid;
+    border-right-style: solid;
     font-family: sans-serif;
     text-align: center;
-    font-size: 60px;
+    font-size: 15px;
+    cursor: pointer;
 }
+
+#regionHeadingBox{
+    background-color: aliceblue;
+    width: 100%;
+    border-right-style: solid;
+    border-top-style: solid;
+    font-family: sans-serif;
+    text-align: center;
+    font-size: 25px;
+}
+
 
 #countyMainContent {
     padding: 0.125%;
