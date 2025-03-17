@@ -346,7 +346,7 @@ function createRegionCharts(){
                         accessibility: {
                             point: {
                                 valueDescriptionFormat: '{index}. Age {xDescription}, {value}%.'
-                            }
+                            },
                         },
                         xAxis: [{
                             categories: categories,
