@@ -180,7 +180,7 @@ function createRegionCharts(){
                         },
 
                         tooltip: {
-                            format: "<b>Age Category: {point.category}</b><br> <span style=\"color:{point.series.color}\">\u25CF</span> {series.name}: Population: {point.y}",
+                            format: "<b>Age {point.category}</b><br> <span style=\"color:{point.series.color}\">\u25CF</span> {series.name} Population: <b>{point.y}<b/>",
 
                             style:{
                               fontSize: 18,
@@ -427,8 +427,8 @@ function createRegionCharts(){
                         },
 
                         tooltip: {
-                            format: '<b>{series.name}s: Age {point.category}</b><br/>' +
-                                '<span style=\"color:{point.series.color}\">\u25CF</span> Population: {(abs point.y)}',
+                            format: '<b>Age {point.category}</b><br/>' +
+                                '<span style=\"color:{point.series.color}\">\u25CF</span> {series.name} Population: <b>{(abs point.y)}</b>',
 
                             style:{
                                 fontSize: 18
@@ -664,6 +664,15 @@ function createRegionCharts(){
                                             accessibility: {
                                                 rangeDescription: 'Years: 2011 to 2023'
                                             }
+                                        },
+
+                                        tooltip: {
+                                            format: "<b>Year: {point.category}</b><br> <span style=\"color:{point.series.color}\">\u25CF</span> {series.name} Population: <b>{point.y}</b>",
+
+                                            style:{
+                                                fontSize: 18,
+                                                fontWeight: 'normal',
+                                            },
                                         },
 
                                         legend: {
