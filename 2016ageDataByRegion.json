@@ -6373,7 +6373,7 @@
     },
     {
         "date": "2011",
-        "geography": "Herefordshire, County of",
+        "geography": "Herefordshire",
         "geography code": "E06000019",
         "Rural Urban": "Total",
         "Age: All categories: Age; measures: Value": "183477",
@@ -9181,7 +9181,7 @@
     },
     {
         "date": "2011",
-        "geography": "City of London",
+        "geography": "City",
         "geography code": "E09000001",
         "Rural Urban": "Total",
         "Age: All categories: Age; measures: Value": "7375",
@@ -16417,7 +16417,7 @@
     },
     {
         "date": "2011",
-        "geography": "Isle of Anglesey",
+        "geography": "Anglesey",
         "geography code": "W06000001",
         "Rural Urban": "Total",
         "Age: All categories: Age; measures: Value": "69751",

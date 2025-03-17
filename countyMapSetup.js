@@ -20,6 +20,7 @@ function createRegionCharts(){
 
             let jsondata2 = JSON.parse(jsondata);
 
+
             for (let i = 0; i < jsondata2.length; i++) {
 
                 if (jsondata2[i].Location === getCookie('clickedMapCode')) {
@@ -70,8 +71,6 @@ function createRegionCharts(){
 
                     let prevCountyData = [];
                     let prevCountyAgeCat = [];
-
-                    console.log(prevCensusData)
 
 
                     // push 2016 census data into prevCountyData in the format {age:x, quantity:y}
@@ -126,7 +125,7 @@ function createRegionCharts(){
                             type: 'column'
                         },
                         title: {
-                            text: `2021 vs 2011 Census Population in by Age Group - ${getCookie('clickedMapName')}`,
+                            text: `2021 vs 2011 Census Population by Age Group - ${getCookie('clickedMapName')}`,
 
                             style:{
                                 fontSize: 22,
@@ -244,7 +243,6 @@ function createRegionCharts(){
 
                             let rawGenderData = JSON.parse(jsondata);
 
-                            console.log(rawGenderData)
 
                             let first = [0,0,'']; let second = [0,0,'']; let third = [0,0,''];
                             let fourth = [0,0,'']; let fifth = [0,0,'']; let sixth = [0,0,''];
@@ -253,9 +251,6 @@ function createRegionCharts(){
                             for (let i =0; i < rawGenderData.length; i++){
 
                                 if (rawGenderData[i].area === getCookie('clickedMapName')){
-                                    console.log("here")
-                                    console.log(rawGenderData[i])
-
 
                                     if (rawGenderData[i].ageCat === 'Aged 16 to 24 years'){
                                         if (rawGenderData[i].gender === 'Female'){
@@ -323,9 +318,6 @@ function createRegionCharts(){
                             cleanedGenderData.push({area:fifth[2], age: '55-64', male: fifth[1], female: fifth[0]});
                             cleanedGenderData.push({area:sixth[2], age: '65-74', male: sixth[1], female: sixth[0]});
                             cleanedGenderData.push({area:final[2], age: '75+', male: final[1], female: final[0]});
-
-                            console.log(cleanedGenderData)
-
 
 
                             Highcharts.Templating.helpers.abs = value => Math.abs(value);
@@ -436,7 +428,7 @@ function createRegionCharts(){
 
                         tooltip: {
                             format: '<b>{series.name}s: Age {point.category}</b><br/>' +
-                                'Population: {(abs point.y)}',
+                                '<span style=\"color:{point.series.color}\">\u25CF</span> Population: {(abs point.y)}',
 
                             style:{
                                 fontSize: 18
@@ -467,101 +459,162 @@ function createRegionCharts(){
 
 
                     // ---------------------------------------------------------------------------------------------------------------------------------------
-                    Highcharts.chart('chart3', {
-                        chart: {
-                            type: 'column'
-                        },
-                        title: {
-                            text: 'Corn vs wheat estimated production for 2023'
-                        },
-                        subtitle: {
-                            text:
-                                'Source: <a target="_blank" ' +
-                                'href="https://www.indexmundi.com/agriculture/?commodity=corn">indexmundi</a>'
-                        },
-                        xAxis: {
-                            categories: ['USA', 'China', 'Brazil', 'EU', 'Argentina', 'India'],
-                            crosshair: true,
-                            accessibility: {
-                                description: 'Countries'
+
+                    let identityData = [{name: 'British only', qty: 0},{name: 'Welsh only', qty: 0},
+                        {name: 'Welsh and British', qty: 0}, {name: 'English only', qty: 0},{name: 'English and British', qty: 0},
+                        {name: 'Non-UK', qty: 0}];
+
+                    fetch('2021IIdentityByRegion.json')
+                        .then(response => {
+                            if (!response.ok) {
+                                throw new Error(`JSON error`);
                             }
-                        },
-                        yAxis: {
-                            min: 0,
-                            title: {
-                                text: '1000 metric tons (MT)'
+                            return response.json();
+                        })
+                        .then(jsondata => {
+
+                            let identData = JSON.stringify(jsondata);
+
+                            let rawIdentityData = JSON.parse(identData);
+
+                            console.log("identity")
+                            console.log(rawIdentityData);
+
+                            for (let i =0; i < rawIdentityData.length; i++){
+                                if (getCookie('clickedMapName') === rawIdentityData[i].area){
+
+                                    // console.log(rawIdentityData[i].identityCat)
+                                    if(rawIdentityData[i].identityCat === '1'){
+                                        identityData[Number(rawIdentityData[i].identityCat)-1].qty += Number(rawIdentityData[i].observation);
+                                    } else if(rawIdentityData[i].identityCat === '2'){
+                                        identityData[Number(rawIdentityData[i].identityCat)-1].qty += Number(rawIdentityData[i].observation);
+                                    } else if(rawIdentityData[i].identityCat === '3'){
+                                        identityData[Number(rawIdentityData[i].identityCat)-1].qty += Number(rawIdentityData[i].observation);
+                                    } else if(rawIdentityData[i].identityCat === '4'){
+                                        identityData[Number(rawIdentityData[i].identityCat)-1].qty += Number(rawIdentityData[i].observation);
+                                    } else if(rawIdentityData[i].identityCat === '5'){
+                                        identityData[Number(rawIdentityData[i].identityCat)-1].qty += Number(rawIdentityData[i].observation);
+                                    } else if(rawIdentityData[i].identityCat === '7'){
+                                        identityData[Number(rawIdentityData[i].identityCat)-2].qty += Number(rawIdentityData[i].observation);
+                                    }
+
+                                }
                             }
-                        },
-                        tooltip: {
-                            valueSuffix: ' (1000 MT)'
-                        },
-                        plotOptions: {
-                            column: {
-                                pointPadding: 0.2,
-                                borderWidth: 0
-                            }
-                        },
-                        series: [
-                            {
-                                name: 'Corn',
-                                data: [387749, 280000, 129000, 64300, 54000, 34300]
-                            },
-                            {
-                                name: 'Wheat',
-                                data: [45321, 140000, 10000, 140500, 19500, 113500]
-                            }
-                        ]
-                    });
+                            console.log(identityData)
 
 
-                    // ---------------------------------------------------------------------------------------------------------------------------------------
-                    Highcharts.chart('chart4', {
-                        chart: {
-                            type: 'column'
-                        },
-                        title: {
-                            text: 'Corn vs wheat estimated production for 2023'
-                        },
-                        subtitle: {
-                            text:
-                                'Source: <a target="_blank" ' +
-                                'href="https://www.indexmundi.com/agriculture/?commodity=corn">indexmundi</a>'
-                        },
-                        xAxis: {
-                            categories: ['USA', 'China', 'Brazil', 'EU', 'Argentina', 'India'],
-                            crosshair: true,
-                            accessibility: {
-                                description: 'Countries'
-                            }
-                        },
-                        yAxis: {
-                            min: 0,
-                            title: {
-                                text: '1000 metric tons (MT)'
-                            }
-                        },
-                        tooltip: {
-                            valueSuffix: ' (1000 MT)'
-                        },
-                        plotOptions: {
-                            column: {
-                                pointPadding: 0.2,
-                                borderWidth: 0
-                            }
-                        },
-                        series: [
-                            {
-                                name: 'Corn',
-                                data: [387749, 280000, 129000, 64300, 54000, 34300]
-                            },
-                            {
-                                name: 'Wheat',
-                                data: [45321, 140000, 10000, 140500, 19500, 113500]
-                            }
-                        ]
-                    });
+
+                            Highcharts.chart('chart3', {
+                                chart: {
+                                    type: 'variablepie'
+                                },
+                                title: {
+                                    text: 'Countries compared by population density and total area, 2024'
+                                },
+                                tooltip: {
+                                    headerFormat: '',
+                                    pointFormat: '<span style="color:{point.color}">\u25CF</span> <b> ' +
+                                        '{point.name}</b><br/>' +
+                                        'Area (square km): <b>{point.y}</b><br/>' +
+                                        'Population density (people per square km): <b>{point.z}</b><br/>'
+                                },
+                                series: [{
+                                    minPointSize: 10,
+                                    innerSize: '20%',
+                                    zMin: 0,
+                                    name: 'countries',
+                                    borderRadius: 5,
+                                    data: [{
+                                        name: identityData[0].name,
+                                        y: identityData[0].qty,
+                                        z: Math.cbrt(Number(identityData[0].qty)) / 10
+
+                                    }, {
+                                        name: identityData[1].name,
+                                        y: identityData[1].qty,
+                                        z: Math.cbrt(Number(identityData[1].qty)) / 10
+
+                                    }, {
+                                        name: identityData[2].name,
+                                        y: identityData[2].qty,
+                                        z: Math.cbrt(Number(identityData[2].qty)) / 10
+
+                                    }, {
+                                        name: identityData[3].name,
+                                        y: identityData[3].qty,
+                                        z: Math.cbrt(Number(identityData[3].qty)) / 10
+                                    }, {
+                                        name: identityData[4].name,
+                                        y: identityData[4].qty,
+                                        z: Math.cbrt(Number(identityData[4].qty)) / 10
+
+                                    }, {
+                                        name: identityData[5].name,
+                                        y: identityData[5].qty,
+                                        z: Math.cbrt(Number(identityData[5].qty)) / 10
+
+                                    }],
+                                    colors: [
+                                        'rgba(71, 82, 255)',
+                                        'rgba(91, 102, 255)',
+                                        'rgba(121, 132, 255)',
+                                        'rgba(158, 162, 255)',
+                                        'rgba(188, 192, 255)',
+                                        'rgba(218,222,255)',
+                                    ]
+                                }]
+                            });
 
 
+
+                            // ---------------------------------------------------------------------------------------------------------------------------------------
+                            Highcharts.chart('chart4', {
+                                chart: {
+                                    type: 'column'
+                                },
+                                title: {
+                                    text: 'Corn vs wheat estimated production for 2023'
+                                },
+                                subtitle: {
+                                    text:
+                                        'Source: <a target="_blank" ' +
+                                        'href="https://www.indexmundi.com/agriculture/?commodity=corn">indexmundi</a>'
+                                },
+                                xAxis: {
+                                    categories: ['USA', 'China', 'Brazil', 'EU', 'Argentina', 'India'],
+                                    crosshair: true,
+                                    accessibility: {
+                                        description: 'Countries'
+                                    }
+                                },
+                                yAxis: {
+                                    min: 0,
+                                    title: {
+                                        text: '1000 metric tons (MT)'
+                                    }
+                                },
+                                tooltip: {
+                                    valueSuffix: ' (1000 MT)'
+                                },
+                                plotOptions: {
+                                    column: {
+                                        pointPadding: 0.2,
+                                        borderWidth: 0
+                                    }
+                                },
+                                series: [
+                                    {
+                                        name: 'Corn',
+                                        data: [387749, 280000, 129000, 64300, 54000, 34300]
+                                    },
+                                    {
+                                        name: 'Wheat',
+                                        data: [45321, 140000, 10000, 140500, 19500, 113500]
+                                    }
+                                ]
+                            });
+
+                        })
                 })
         })
 }
