@@ -1,4 +1,5 @@
 // For displaying detailed broken down charts on region page
+
 function createRegionCharts(){
 
     let countyData = [];
@@ -137,6 +138,7 @@ function createRegionCharts(){
                                 'href="https://statistics.ukdataservice.ac.uk/dataset/ons_2021_demography_age_single_year">England and Wales Census 2021</a>'
                         },
                         xAxis: {
+
                             categories: [countyAgeCat[0].x, countyAgeCat[1].x, countyAgeCat[2].x, countyAgeCat[3].x,
                                 countyAgeCat[4].x, countyAgeCat[5].x, countyAgeCat[6].x, countyAgeCat[7].x,
                                 countyAgeCat[8].x, countyAgeCat[9].x, countyAgeCat[10].x],
@@ -157,7 +159,7 @@ function createRegionCharts(){
 
                             min: 0,
                             title: {
-                                text: 'Individuals Residing',
+                                text: '# of Individuals Residing',
 
                                 style:{
                                     fontSize: 16,
@@ -195,7 +197,21 @@ function createRegionCharts(){
                         },
                         series: [{
                             name: '2021',
+                            color: {
+                                pattern: {
+                                    path: {
+                                        d: 'M 10 10 L 10 10 L 2 8 Z',
+                                        // fill: '#102045'
+                                    },
+                                    backgroundColor: '#2caffe',
+                                    width: 5,
+                                    height: 15,
+                                    color: '#000000',
+                                    opacity: 0.5
+                                }
+                            },
                             data: [
+
                                 [countyAgeCat[0].x, countyAgeCat[0].y],
                                 [countyAgeCat[1].x, countyAgeCat[1].y],
                                 [countyAgeCat[2].x, countyAgeCat[2].y],
@@ -210,6 +226,20 @@ function createRegionCharts(){
                             ]},
                             {
                                 name: '2011',
+                                color: {
+                                    pattern: {
+                                        path: {
+                                            d: "M32.763-11.976c-1.05-.075-1.95.676-2.024 1.726L29.764.849c-.075 1.05.675 1.95 1.725 2.026s1.95-.675 2.025-1.725l.975-11.1c.075-1.05-.675-1.95-1.725-2.025zM54.299 1.32a2 2 0 0 0-.386.015c-.975.15-1.725 1.05-1.575 2.1l1.5 11.025c.15.975 1.05 1.725 2.1 1.575a1.732 1.732 0 0 0 1.575-2.1l-1.5-11.025c-.131-.853-.836-1.533-1.714-1.59M7.369 2.54a1.81 1.81 0 0 0-1.662 1.663c-.075 1.05.675 1.952 1.65 2.027l11.1 1.05c.975.15 1.95-.601 2.025-1.651.15-.975-.6-1.95-1.65-2.025l-11.1-1.05a1.6 1.6 0 0 0-.363-.015zM1.76 13.017a1.83 1.83 0 0 0-1.285.6l-7.65 8.101c-.75.75-.675 1.95.075 2.625s1.95.674 2.625-.076l7.651-8.099c.75-.75.674-1.95-.076-2.625a1.8 1.8 0 0 0-1.34-.526m75 0a1.83 1.83 0 0 0-1.285.6l-7.65 8.101c-.75.75-.675 1.95.075 2.625s1.95.674 2.625-.076l7.651-8.099c.75-.75.674-1.95-.076-2.625a1.8 1.8 0 0 0-1.34-.526m-39.731 2.906a1.8 1.8 0 0 0-1.34.527l-7.95 7.723c-.75.675-.826 1.875-.076 2.625.675.75 1.875.752 2.625.077l7.95-7.725c.75-.675.826-1.875.076-2.625a1.83 1.83 0 0 0-1.285-.602m24.639 18.928c-.24.02-.48.085-.705.197a1.903 1.903 0 0 0-.825 2.55l5.1 9.902a1.9 1.9 0 0 0 2.55.824c.975-.45 1.276-1.574.826-2.55l-5.1-9.9c-.395-.73-1.125-1.083-1.846-1.023m-50.37-4.862a1.76 1.76 0 0 0-1.035.336c-.825.6-1.05 1.725-.524 2.625l6.15 9.223c.6.9 1.8 1.127 2.625.526.9-.6 1.124-1.8.524-2.624l-6.15-9.226a1.91 1.91 0 0 0-1.59-.86m32.705 9.766q-.181-.01-.365.019l-10.95 2.175c-1.05.15-1.725 1.126-1.5 2.176.15 1.05 1.126 1.725 2.176 1.5l10.95-2.175c1.05-.15 1.725-1.125 1.5-2.175a1.99 1.99 0 0 0-1.811-1.52m4.556 12.195a1.93 1.93 0 0 0-1.845.949c-.45.9-.15 2.025.75 2.55l9.75 5.4c.9.45 2.025.15 2.55-.75s.15-2.025-.75-2.55l-9.75-5.4a2 2 0 0 0-.705-.199M71.913 58c-1.05-.075-1.875.748-1.95 1.798l-.45 11.1c-.075 1.05.75 1.876 1.8 1.95.975 0 1.875-.75 1.95-1.8l.45-11.1c.075-1.05-.75-1.873-1.8-1.948m-55.44 1.08a1.87 1.87 0 0 0-1.035.42l-8.775 6.825c-.75.6-.9 1.8-.3 2.625.6.75 1.8.9 2.626.3l8.775-6.827c.75-.6.9-1.8.3-2.625a1.78 1.78 0 0 0-1.591-.72zm16.29 3.945c-1.05-.075-1.95.675-2.024 1.725l-.975 11.099c-.075 1.05.675 1.95 1.725 2.026s1.95-.675 2.025-1.725l.975-11.102c.075-1.05-.675-1.95-1.725-2.024z",
+                                            strokeWidth: 3.75,
+                                            fill: '#102045'
+                                        },
+                                        backgroundColor: '#6b8abc',
+                                        width: 5,
+                                        height: 5,
+                                        color: '#000000',
+                                        opacity: 0.5
+                                    }
+                                },
                                 data: [
                                 [prevCountyAgeCat[0].x, prevCountyAgeCat[0].y],
                                 [prevCountyAgeCat[1].x, prevCountyAgeCat[1].y],
@@ -395,7 +425,7 @@ function createRegionCharts(){
                         }],
                         yAxis: {
                             title: {
-                                text: 'Individuals Residing',
+                                text: '# of Individuals Residing',
                                 margin: 10,
                                 style:{
                                     fontSize: 16,
@@ -437,14 +467,45 @@ function createRegionCharts(){
 
                         series: [{
                             name: 'Male',
+
+                            color: {
+                                pattern: {
+                                    path: {
+                                        d: 'M 10 10 L 10 10 L 2 8 Z',
+                                        // fill: '#102045'
+                                    },
+                                    backgroundColor: '#2caffe',
+                                    width: 5,
+                                    height: 15,
+                                    color: '#000000',
+                                    opacity: 0.5
+                                }
+                            },
+
                             data: [
                                 -cleanedGenderData[0].male, -cleanedGenderData[1].male, -cleanedGenderData[2].male,
                                 -cleanedGenderData[3].male, -cleanedGenderData[4].male, -cleanedGenderData[5].male,
                                 -cleanedGenderData[6].male
 
-                            ]
+                            ],
                         }, {
                             name: 'Female',
+
+                            color: {
+                                pattern: {
+                                    path: {
+                                        d: "M32.763-11.976c-1.05-.075-1.95.676-2.024 1.726L29.764.849c-.075 1.05.675 1.95 1.725 2.026s1.95-.675 2.025-1.725l.975-11.1c.075-1.05-.675-1.95-1.725-2.025zM54.299 1.32a2 2 0 0 0-.386.015c-.975.15-1.725 1.05-1.575 2.1l1.5 11.025c.15.975 1.05 1.725 2.1 1.575a1.732 1.732 0 0 0 1.575-2.1l-1.5-11.025c-.131-.853-.836-1.533-1.714-1.59M7.369 2.54a1.81 1.81 0 0 0-1.662 1.663c-.075 1.05.675 1.952 1.65 2.027l11.1 1.05c.975.15 1.95-.601 2.025-1.651.15-.975-.6-1.95-1.65-2.025l-11.1-1.05a1.6 1.6 0 0 0-.363-.015zM1.76 13.017a1.83 1.83 0 0 0-1.285.6l-7.65 8.101c-.75.75-.675 1.95.075 2.625s1.95.674 2.625-.076l7.651-8.099c.75-.75.674-1.95-.076-2.625a1.8 1.8 0 0 0-1.34-.526m75 0a1.83 1.83 0 0 0-1.285.6l-7.65 8.101c-.75.75-.675 1.95.075 2.625s1.95.674 2.625-.076l7.651-8.099c.75-.75.674-1.95-.076-2.625a1.8 1.8 0 0 0-1.34-.526m-39.731 2.906a1.8 1.8 0 0 0-1.34.527l-7.95 7.723c-.75.675-.826 1.875-.076 2.625.675.75 1.875.752 2.625.077l7.95-7.725c.75-.675.826-1.875.076-2.625a1.83 1.83 0 0 0-1.285-.602m24.639 18.928c-.24.02-.48.085-.705.197a1.903 1.903 0 0 0-.825 2.55l5.1 9.902a1.9 1.9 0 0 0 2.55.824c.975-.45 1.276-1.574.826-2.55l-5.1-9.9c-.395-.73-1.125-1.083-1.846-1.023m-50.37-4.862a1.76 1.76 0 0 0-1.035.336c-.825.6-1.05 1.725-.524 2.625l6.15 9.223c.6.9 1.8 1.127 2.625.526.9-.6 1.124-1.8.524-2.624l-6.15-9.226a1.91 1.91 0 0 0-1.59-.86m32.705 9.766q-.181-.01-.365.019l-10.95 2.175c-1.05.15-1.725 1.126-1.5 2.176.15 1.05 1.126 1.725 2.176 1.5l10.95-2.175c1.05-.15 1.725-1.125 1.5-2.175a1.99 1.99 0 0 0-1.811-1.52m4.556 12.195a1.93 1.93 0 0 0-1.845.949c-.45.9-.15 2.025.75 2.55l9.75 5.4c.9.45 2.025.15 2.55-.75s.15-2.025-.75-2.55l-9.75-5.4a2 2 0 0 0-.705-.199M71.913 58c-1.05-.075-1.875.748-1.95 1.798l-.45 11.1c-.075 1.05.75 1.876 1.8 1.95.975 0 1.875-.75 1.95-1.8l.45-11.1c.075-1.05-.75-1.873-1.8-1.948m-55.44 1.08a1.87 1.87 0 0 0-1.035.42l-8.775 6.825c-.75.6-.9 1.8-.3 2.625.6.75 1.8.9 2.626.3l8.775-6.827c.75-.6.9-1.8.3-2.625a1.78 1.78 0 0 0-1.591-.72zm16.29 3.945c-1.05-.075-1.95.675-2.024 1.725l-.975 11.099c-.075 1.05.675 1.95 1.725 2.026s1.95-.675 2.025-1.725l.975-11.102c.075-1.05-.675-1.95-1.725-2.024z",
+                                        strokeWidth: 3.75,
+                                        fill: '#102045'
+                                    },
+                                    backgroundColor: '#6b8abc',
+                                    width: 5,
+                                    height: 5,
+                                    color: '#000000',
+                                    opacity: 0.5
+                                }
+                            },
+
                             data: [
                                 cleanedGenderData[0].female, cleanedGenderData[1].female, cleanedGenderData[2].female,
                                 cleanedGenderData[3].female, cleanedGenderData[4].female, cleanedGenderData[5].female,
@@ -526,6 +587,7 @@ function createRegionCharts(){
                                         fontSize: 18
                                     },
                                 },
+
                                 series: [{
                                     minPointSize: 10,
                                     innerSize: '20%',
@@ -535,12 +597,19 @@ function createRegionCharts(){
                                     data: [{
                                         name: identityData[0].name,
                                         y: identityData[0].qty,
-                                        z: Math.cbrt(Number(identityData[0].qty)) / 10
+                                        z: Math.cbrt(Number(identityData[0].qty)) / 10,
+                                        // color: 'rgba(71, 82, 255)',
+                                        color:{
+                                            patternIndex: 1
+                                        },
+
 
                                     }, {
                                         name: identityData[1].name,
                                         y: identityData[1].qty,
-                                        z: Math.cbrt(Number(identityData[1].qty)) / 10
+                                        z: Math.cbrt(Number(identityData[1].qty)) / 10,
+                                        // color: 'rgba(91, 102, 255)',
+
 
                                     }, {
                                         name: identityData[2].name,
@@ -554,12 +623,11 @@ function createRegionCharts(){
                                     }, {
                                         name: identityData[4].name,
                                         y: identityData[4].qty,
-                                        z: Math.cbrt(Number(identityData[4].qty)) / 10
-
+                                        z: Math.cbrt(Number(identityData[4].qty)) / 10,
                                     }, {
                                         name: identityData[5].name,
                                         y: identityData[5].qty,
-                                        z: Math.cbrt(Number(identityData[5].qty)) / 10
+                                        z: Math.cbrt(Number(identityData[5].qty)) / 10,
 
                                     }],
                                     dataLabels: {
@@ -634,7 +702,7 @@ function createRegionCharts(){
 
                                         yAxis: {
                                             title: {
-                                                text: 'Individuals Residing',
+                                                text: '# of Individuals Residing',
 
                                                 style:{
                                                     fontSize: 16,
