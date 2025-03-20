@@ -233,7 +233,7 @@ function createRegionCharts(){
                                             strokeWidth: 3.75,
                                             fill: '#102045'
                                         },
-                                        backgroundColor: '#6b8abc',
+                                        backgroundColor: 'rgba(95,90,200)',
                                         width: 5,
                                         height: 5,
                                         color: '#000000',
@@ -472,7 +472,6 @@ function createRegionCharts(){
                                 pattern: {
                                     path: {
                                         d: 'M 10 10 L 10 10 L 2 8 Z',
-                                        // fill: '#102045'
                                     },
                                     backgroundColor: '#2caffe',
                                     width: 5,
@@ -498,7 +497,7 @@ function createRegionCharts(){
                                         strokeWidth: 3.75,
                                         fill: '#102045'
                                     },
-                                    backgroundColor: '#6b8abc',
+                                    backgroundColor: 'rgba(95,90,200)',
                                     width: 5,
                                     height: 5,
                                     color: '#000000',
@@ -588,48 +587,145 @@ function createRegionCharts(){
                                     },
                                 },
 
+
+
+
+
+
                                 series: [{
                                     minPointSize: 10,
                                     innerSize: '20%',
                                     zMin: 0,
                                     name: 'countries',
                                     borderRadius: 10,
-                                    data: [{
-                                        name: identityData[0].name,
-                                        y: identityData[0].qty,
-                                        z: Math.cbrt(Number(identityData[0].qty)) / 10,
-                                        // color: 'rgba(71, 82, 255)',
-                                        color:{
-                                            patternIndex: 1
+                                    borderColor: '#000000',
+                                    borderWidth: 0.5,
+
+                                    data: [
+                                        {
+                                            color: {
+                                                pattern: {
+                                                    path: {
+                                                        d: 'M 10 10 L 10 10 L 2 8 Z',
+                                                    },
+                                                    backgroundColor: 'rgba(71, 82, 255)',
+                                                    width: 12,
+                                                    height: 9,
+                                                    color: '#000000',
+                                                    opacity: 0.5
+                                                }
+                                            },
+                                            name: identityData[0].name,
+                                            y: identityData[0].qty,
+                                            z: Math.cbrt(Number(identityData[0].qty)) / 10,
+                                        },
+
+                                        {
+                                            color: {
+                                                pattern: {
+                                                    path: {
+                                                        d: "M 10 10 L 10 10 L 10 8 Z",
+                                                    },
+                                                    backgroundColor: 'rgba(121, 132, 255)',
+                                                    width: 20,
+                                                    height: 15,
+                                                    color: '#000000',
+                                                    opacity: 0.5,
+                                                }
+                                            },
+
+                                            name: identityData[1].name,
+                                            y: identityData[1].qty,
+                                            z: Math.cbrt(Number(identityData[1].qty)) / 10,
                                         },
 
 
-                                    }, {
-                                        name: identityData[1].name,
-                                        y: identityData[1].qty,
-                                        z: Math.cbrt(Number(identityData[1].qty)) / 10,
-                                        // color: 'rgba(91, 102, 255)',
+                                        {
+                                            color: {
+                                                pattern: {
+                                                    path: {
+                                                        d: 'M 2 1 L 10 10 L 10 8 Z',
+                                                    },
+                                                    backgroundColor: 'rgba(91, 102, 255)',
+                                                    width: 10,
+                                                    height: 6,
+                                                    color: '#000000',
+                                                    opacity: 0.5
+                                                }
+                                            },
+
+                                            name: identityData[2].name,
+                                            y: identityData[2].qty,
+                                            z: Math.cbrt(Number(identityData[2].qty)) / 10,
+                                        },
 
 
-                                    }, {
-                                        name: identityData[2].name,
-                                        y: identityData[2].qty,
-                                        z: Math.cbrt(Number(identityData[2].qty)) / 10
+                                        {
+                                            color: {
+                                                pattern: {
+                                                    path: {
+                                                        d: 'M 1 5 L 10 5 L 2 8 Z',
+                                                    },
+                                                    backgroundColor: 'rgba(158, 162, 255)',
+                                                    width: 1,
+                                                    height: 15,
+                                                    color: '#000000',
+                                                    opacity: 0.5
+                                                }
+                                            },
 
-                                    }, {
-                                        name: identityData[3].name,
-                                        y: identityData[3].qty,
-                                        z: Math.cbrt(Number(identityData[3].qty)) / 10
-                                    }, {
-                                        name: identityData[4].name,
-                                        y: identityData[4].qty,
-                                        z: Math.cbrt(Number(identityData[4].qty)) / 10,
-                                    }, {
-                                        name: identityData[5].name,
-                                        y: identityData[5].qty,
-                                        z: Math.cbrt(Number(identityData[5].qty)) / 10,
+                                            name: identityData[3].name,
+                                            y: identityData[3].qty,
+                                            z: Math.cbrt(Number(identityData[3].qty)) / 10,
 
-                                    }],
+                                        },
+
+
+
+                                        {
+                                            color: {
+                                                pattern: {
+                                                    path: {
+                                                        d: 'M 5 10 L 10 5 L 9 2 Z',
+                                                    },
+                                                    backgroundColor: 'rgba(188, 192, 255)',
+                                                    width: 15,
+                                                    height: 20,
+                                                    color: '#000000',
+                                                    opacity: 0.5
+                                                }
+                                            },
+
+                                            name: identityData[4].name,
+                                            y: identityData[4].qty,
+                                            z: Math.cbrt(Number(identityData[4].qty)) / 10,
+                                        },
+
+
+
+                                        {
+                                            color: {
+                                                pattern: {
+                                                    path: {
+                                                        d: 'M 5 10 L 10 5 L 2 8 Z',
+
+                                                    },
+                                                    backgroundColor: 'rgba(218,222,255)',
+                                                    width: 5,
+                                                    height: 15,
+                                                    color: '#000000',
+                                                    opacity: 0.5
+                                                }
+                                            },
+
+
+                                            name: identityData[5].name,
+                                            y: identityData[5].qty,
+                                            z: Math.cbrt(Number(identityData[5].qty)) / 10,
+
+
+                                        }],
+
                                     dataLabels: {
                                         style: {
                                             fontSize: 16
