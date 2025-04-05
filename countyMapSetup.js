@@ -1,13 +1,17 @@
-// For displaying detailed broken down charts on region page
+// This JS file contains functions and methods related to the detailed broken down charts on region page
 
+
+// This function processes data and generates charts
 function createRegionCharts(){
 
     let countyData = [];
     let countyAgeCat = [];
 
+    // Gets area clicked from cookie and places it as title
     document.getElementById('region').innerText = getCookie('clickedMapName');
 
 
+    // Data for chart3 - bar chart 2021 vs 2011
     fetch('ageDataByRegion.json')
         .then(response => {
             if (!response.ok) {
@@ -22,17 +26,18 @@ function createRegionCharts(){
             let jsondata2 = JSON.parse(jsondata);
 
 
+            // push only records from clicked region to array
             for (let i = 0; i < jsondata2.length; i++) {
 
                 if (jsondata2[i].Location === getCookie('clickedMapCode')) {
                     countyData.push(jsondata2[i]);
-
                 }
             }
 
             let recordCount = 0;
             let valueCount = 0;
 
+            // count totals
             for (let i = 0; i < countyData.length; i++) {
 
                 recordCount = recordCount + 1;
@@ -53,7 +58,6 @@ function createRegionCharts(){
             }
             // For those age 100+
             countyAgeCat.push({x: '100+', y: Number(countyData[countyData.length-1].Observation)});
-
 
 
 
@@ -97,8 +101,6 @@ function createRegionCharts(){
 
 
                     for (let i = 0; i < prevCountyData.length; i++) {
-
-
 
                         oldRecordCount = oldRecordCount + 1;
 
@@ -200,6 +202,7 @@ function createRegionCharts(){
                             color: {
                                 pattern: {
                                     path: {
+                                        // Pattern fill for bars
                                         d: 'M 10 10 L 10 10 L 2 8 Z',
                                         // fill: '#102045'
                                     },
@@ -229,6 +232,7 @@ function createRegionCharts(){
                                 color: {
                                     pattern: {
                                         path: {
+                                            // Patterns for bars
                                             d: "M32.763-11.976c-1.05-.075-1.95.676-2.024 1.726L29.764.849c-.075 1.05.675 1.95 1.725 2.026s1.95-.675 2.025-1.725l.975-11.1c.075-1.05-.675-1.95-1.725-2.025zM54.299 1.32a2 2 0 0 0-.386.015c-.975.15-1.725 1.05-1.575 2.1l1.5 11.025c.15.975 1.05 1.725 2.1 1.575a1.732 1.732 0 0 0 1.575-2.1l-1.5-11.025c-.131-.853-.836-1.533-1.714-1.59M7.369 2.54a1.81 1.81 0 0 0-1.662 1.663c-.075 1.05.675 1.952 1.65 2.027l11.1 1.05c.975.15 1.95-.601 2.025-1.651.15-.975-.6-1.95-1.65-2.025l-11.1-1.05a1.6 1.6 0 0 0-.363-.015zM1.76 13.017a1.83 1.83 0 0 0-1.285.6l-7.65 8.101c-.75.75-.675 1.95.075 2.625s1.95.674 2.625-.076l7.651-8.099c.75-.75.674-1.95-.076-2.625a1.8 1.8 0 0 0-1.34-.526m75 0a1.83 1.83 0 0 0-1.285.6l-7.65 8.101c-.75.75-.675 1.95.075 2.625s1.95.674 2.625-.076l7.651-8.099c.75-.75.674-1.95-.076-2.625a1.8 1.8 0 0 0-1.34-.526m-39.731 2.906a1.8 1.8 0 0 0-1.34.527l-7.95 7.723c-.75.675-.826 1.875-.076 2.625.675.75 1.875.752 2.625.077l7.95-7.725c.75-.675.826-1.875.076-2.625a1.83 1.83 0 0 0-1.285-.602m24.639 18.928c-.24.02-.48.085-.705.197a1.903 1.903 0 0 0-.825 2.55l5.1 9.902a1.9 1.9 0 0 0 2.55.824c.975-.45 1.276-1.574.826-2.55l-5.1-9.9c-.395-.73-1.125-1.083-1.846-1.023m-50.37-4.862a1.76 1.76 0 0 0-1.035.336c-.825.6-1.05 1.725-.524 2.625l6.15 9.223c.6.9 1.8 1.127 2.625.526.9-.6 1.124-1.8.524-2.624l-6.15-9.226a1.91 1.91 0 0 0-1.59-.86m32.705 9.766q-.181-.01-.365.019l-10.95 2.175c-1.05.15-1.725 1.126-1.5 2.176.15 1.05 1.126 1.725 2.176 1.5l10.95-2.175c1.05-.15 1.725-1.125 1.5-2.175a1.99 1.99 0 0 0-1.811-1.52m4.556 12.195a1.93 1.93 0 0 0-1.845.949c-.45.9-.15 2.025.75 2.55l9.75 5.4c.9.45 2.025.15 2.55-.75s.15-2.025-.75-2.55l-9.75-5.4a2 2 0 0 0-.705-.199M71.913 58c-1.05-.075-1.875.748-1.95 1.798l-.45 11.1c-.075 1.05.75 1.876 1.8 1.95.975 0 1.875-.75 1.95-1.8l.45-11.1c.075-1.05-.75-1.873-1.8-1.948m-55.44 1.08a1.87 1.87 0 0 0-1.035.42l-8.775 6.825c-.75.6-.9 1.8-.3 2.625.6.75 1.8.9 2.626.3l8.775-6.827c.75-.6.9-1.8.3-2.625a1.78 1.78 0 0 0-1.591-.72zm16.29 3.945c-1.05-.075-1.95.675-2.024 1.725l-.975 11.099c-.075 1.05.675 1.95 1.725 2.026s1.95-.675 2.025-1.725l.975-11.102c.075-1.05-.675-1.95-1.725-2.024z",
                                             strokeWidth: 3.75,
                                             fill: '#102045'
@@ -260,6 +264,7 @@ function createRegionCharts(){
                     // ---------------------------------------------------------------------------------------------------------------------------------------
                     let cleanedGenderData = [];
 
+                    // Processing and data for chart 2  - gender population split
                     fetch('2021GenderDataByRegion.json')
                         .then(response => {
                             if (!response.ok) {
@@ -273,13 +278,14 @@ function createRegionCharts(){
 
                             let rawGenderData = JSON.parse(jsondata);
 
-
+                            // Craete arrays for each category of age category
                             let first = [0,0,'']; let second = [0,0,'']; let third = [0,0,''];
                             let fourth = [0,0,'']; let fifth = [0,0,'']; let sixth = [0,0,''];
                             let final = [0,0,''];
 
                             for (let i =0; i < rawGenderData.length; i++){
 
+                                // aggregates data for each gender/age category
                                 if (rawGenderData[i].area === getCookie('clickedMapName')){
 
                                     if (rawGenderData[i].ageCat === 'Aged 16 to 24 years'){
@@ -852,6 +858,7 @@ function createRegionCharts(){
                                                 label: {
                                                     connectorAllowed: false
                                                 },
+                                                dashStyle: 'ShortDash'
                                             }
                                         },
 

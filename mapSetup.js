@@ -1,7 +1,11 @@
+// This JS file contains functions and methods related to the chloropleth map on the landing page
+
+// Arrays Initialised for each age category from 0-9 to 100+
 let arr09 = []; let arr19 = []; let arr29 = []; let arr39 = []; let arr49 = [];
 let arr59 = []; let arr69 = []; let arr79 = []; let arr89 = []; let arr99 = [];
 let arr100 = [];
 
+// Arrays to hold aggregated totals of data from above arrays
 let arrTotals9 = []; let arrTotals19 = []; let arrTotals29 = []; let arrTotals39 = [];
 let arrTotals49 = []; let arrTotals59 = []; let arrTotals69 = []; let arrTotals79 = [];
 let arrTotals89 = []; let arrTotals99 = []; let arrTotals100 = [];
@@ -11,8 +15,8 @@ let arraySelected = arrTotals9;
 let clickedButton = 1;
 
 
-// Default title set to Ages 0-9
-async function createMap(title = 'Ages 0-9'){
+// Function to read in data from the JSON file. Function splits records into age category arrays
+async function mapDataSetup(title) {
 
     fetch('ageDataByRegion.json')
         .then(response => {
@@ -28,6 +32,7 @@ async function createMap(title = 'Ages 0-9'){
 
             let jsondata2 = JSON.parse(jsondata);
 
+            // Pushes records to array corresponding to the age in the data point
             for (let i = 0; i < jsondata2.length; i++) {
                 if (Number(jsondata2[i].Age) < 10) {
                     arr09.push(jsondata2[i]);
@@ -55,6 +60,7 @@ async function createMap(title = 'Ages 0-9'){
 
             }
 
+            // Aggregates totals of each age category
             arrAgeSplit(arr09, 9);
             arrAgeSplit(arr19, 19);
             arrAgeSplit(arr29, 29);
@@ -66,15 +72,24 @@ async function createMap(title = 'Ages 0-9'){
             arrAgeSplit(arr89, 89);
             arrAgeSplit(arr99, 99);
             arrAgeSplit(arr100, 100);
-        })
 
+            mapSettings(title);
+        })
+}
+
+// Function selects data to display and details chart options for the map
+async function mapSettings(title = 'Ages 0-9') {
     const topology = await fetch(
         'https://code.highcharts.com/mapdata/countries/gb/gb-all.topo.json'
     ).then(response => response.json());
 
+    console.log('Before Push To Array - arr selected')
+    console.log(arraySelected)
+
+
     let data = pushToArray(arraySelected)
 
-    console.log(data)
+    console.log("data after pushtoarray")
 
 
     // Create the chart
@@ -87,7 +102,7 @@ async function createMap(title = 'Ages 0-9'){
         title: {
             text: "England and Wales Population Density Map:" + `<b style='color: blue'> ${title}</b>`,
 
-            style:{
+            style: {
                 fontSize: 30,
             }
         },
@@ -96,13 +111,24 @@ async function createMap(title = 'Ages 0-9'){
             text: 'Source: <a target="_blank" ' +
                 'href="https://statistics.ukdataservice.ac.uk/dataset/ons_2021_demography_age_single_year">England and Wales Census 2021</a>',
 
-            style:{
+            style: {
                 fontSize: 20
             }
         },
 
         subsubTitle: {
             text: "data"
+        },
+
+        caption: {
+            style:{
+                fontSize: 16,
+            },
+            margin: 50,
+            text: '<b>A map showing population density across England and Wales for age groups ranging from 0-9 ' +
+                ' to 100+ utilising data from the 2021 national census.</b> <br> The map shows that across all age ' +
+                'groups, population density is generally higher in large towns and cities in England, especially ' +
+                'around London and Birmingham, and lower in rural Wales within regions such as Powys and Ceredigion. '
         },
 
         mapNavigation: {
@@ -150,12 +176,11 @@ async function createMap(title = 'Ages 0-9'){
                 from: 1000
             }]
         },
-
         legend: {
             borderWidth: 0.25,
 
             // Legend categories font size
-            itemStyle:{
+            itemStyle: {
                 margin: 20,
                 fontSize: 18
             },
@@ -167,7 +192,7 @@ async function createMap(title = 'Ages 0-9'){
                 text: 'People per km²',
 
                 // Legend title size
-                style:{
+                style: {
                     fontSize: 18
                 }
             }
@@ -187,17 +212,18 @@ async function createMap(title = 'Ages 0-9'){
                 valueDecimals: 2,
                 valueSuffix: '/km²',
             },
+            cursor: 'pointer',
             states: {
                 hover: {
-                    color: '#BADA55'
+                    color: 'orange',
                 }
             },
             dataLabels: {
                 enabled: true,
 
                 // Formats chart to only return labels for counties that exist in data (england and wales data)
-                formatter: function(){
-                    if(this.point.value !== null){
+                formatter: function () {
+                    if (this.point.value !== null) {
                         return this.point.name;
                     }
                 }
@@ -205,33 +231,28 @@ async function createMap(title = 'Ages 0-9'){
 
             trackByArea: true,
             events: {
-                click: function(event){
+                click: function (event) {
                     // alert(event.point.x);
                     console.log("point");
-                    for(let i = 0; i < data.length; i++){
+                    for (let i = 0; i < data.length; i++) {
 
                         // When an area of the map is clicked, navigate to a new page containing focused data
-                        if (event.point.value === data[i][1]){
+                        if (event.point.value === data[i][1]) {
                             console.log(event.point.value + ' matches with: ' + data[i][0]);
                             document.cookie = `clickedMapCode = ${data[i][0]}; expires = `;
                             document.cookie = `clickedMapName = ${event.point.name}; expires = `;
                             console.log(getCookie('clickedMapCode'));
-                            window.location.href='regionCharts.html';
+                            window.location.href = 'regionCharts.html';
                         }
                     }
                 }
             }
         }]
     });
-
 }
 
 
-
-
-
-
-
+// Empties arrays when function called
 function clearArray(){
     arr09 = []; arr19 = []; arr29 = []; arr39 = []; arr49 = []; arr59 = []; arr69 = []; arr79 = []; arr89 = []; arr99 = []; arr100 = [];
 
@@ -240,7 +261,7 @@ function clearArray(){
 }
 
 
-
+// Changes age category button highlighting on click to dim or brighten depending on category selected
 function changeCategory(number, text, id){
     // first change selected button
     let activeButton = document.getElementById(`ageBtn${clickedButton}`)
@@ -250,21 +271,17 @@ function changeCategory(number, text, id){
     activeButton.classList.add('active');
 
     arraySelected = number;
-    createMap(text);
+    mapDataSetup(text);
 }
 
 function pushToArray(array){
-
-
     // Current data category of age
     let data = [[]]
-
+    console.log(array.length)
     for (let i = 0; i < array.length; i++){
         data.push([array[i].name, array[i].qty]);
     }
-
     return data;
-
 }
 
 
@@ -370,19 +387,10 @@ function arrAgeSplit(arrName, maxAge){
                 valueCount = 0;
             }
         }
-
-        // For the age 100+ array
-    /*} else {
-        for (let i = 0; i < arrName.length; i++) {
-            arrTotals100.push(
-                {name: arrName[i].Location, qty: arrName[i].Observation}
-            )
-        }
-    }*/
 }
 
 
-// This function processes a cookie
+// This function processes a cookie and used when an area of the map is clicked
 function getCookie(text){
     // Splits the cookie string using the standard cookie separator ";"
     const splitCookie = document.cookie.split(";");
