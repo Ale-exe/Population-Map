@@ -36,3 +36,19 @@
     padding-left: 0.125%;
     padding-right: 0.125%;
 }
+
+@media only screen and (max-width: 1000px) {
+
+    .chart{
+        width: 100%;
+        padding-left: 0.125%;
+        padding-right: 0.125%;
+    }
+
+    .chartRow{
+        display: grid;
+        padding-bottom: 0.125%;
+        padding-top: 0.125%;
+    }
+
+}

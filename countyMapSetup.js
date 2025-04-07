@@ -784,8 +784,29 @@ function createRegionCharts(){
                                             }
                                         }
                                     }
+
+                                    cleanedPopulationOverTime.push({sex:'B',
+                                        date11:Number(cleanedPopulationOverTime[0].date11)+Number(cleanedPopulationOverTime[1].date11),
+                                        date12:Number(cleanedPopulationOverTime[0].date12)+Number(cleanedPopulationOverTime[1].date12),
+                                        date13:Number(cleanedPopulationOverTime[0].date13)+Number(cleanedPopulationOverTime[1].date13),
+                                        date14:Number(cleanedPopulationOverTime[0].date14)+Number(cleanedPopulationOverTime[1].date14),
+                                        date15:Number(cleanedPopulationOverTime[0].date15)+Number(cleanedPopulationOverTime[1].date15),
+                                        date16:Number(cleanedPopulationOverTime[0].date16)+Number(cleanedPopulationOverTime[1].date16),
+                                        date17:Number(cleanedPopulationOverTime[0].date17)+Number(cleanedPopulationOverTime[1].date17),
+                                        date18:Number(cleanedPopulationOverTime[0].date18)+Number(cleanedPopulationOverTime[1].date18),
+                                        date19:Number(cleanedPopulationOverTime[0].date19)+Number(cleanedPopulationOverTime[1].date19),
+                                        date20:Number(cleanedPopulationOverTime[0].date20)+Number(cleanedPopulationOverTime[1].date20),
+                                        date21:Number(cleanedPopulationOverTime[0].date21)+Number(cleanedPopulationOverTime[1].date21),
+                                        date22:Number(cleanedPopulationOverTime[0].date22)+Number(cleanedPopulationOverTime[1].date22),
+                                        date23:Number(cleanedPopulationOverTime[0].date23)+Number(cleanedPopulationOverTime[1].date23)})
+
+
+                                    console.log("cleanedPop/TIME")
                                     console.log(cleanedPopulationOverTime)
 
+                                    // let chart = document.getElementById('highcharts-c9yhno7-62')
+                                    // let button = document.createElement('button')
+                                    // chart.append(button)
 
 
                                     Highcharts.chart('chart1', {
@@ -900,7 +921,44 @@ function createRegionCharts(){
                                                 }
 
                                             }]
-                                        }
+                                        },
+
+                                        // chart: {
+                                        //     events: {
+                                        //         render() {
+                                        //             let chart = this,
+                                        //                 x = chart.plotWidth /20,
+                                        //                 y = chart.plotHeight *1.5;
+                                        //
+                                        //             if (chart.customBtn) {
+                                        //                 chart.customBtn.destroy();
+                                        //             }
+                                        //
+                                        //             chart.customBtn = chart.renderer.button('Reset', x, y, function() {
+                                        //                 console.log("pressed");
+                                        //                 chart.series.setData = [{
+                                        //                     name: 'Both',
+                                        //                     data: [
+                                        //                         Number(cleanedPopulationOverTime[2].date11), Number(cleanedPopulationOverTime[2].date12),
+                                        //                         Number(cleanedPopulationOverTime[2].date13), Number(cleanedPopulationOverTime[2].date14),
+                                        //                         Number(cleanedPopulationOverTime[2].date15), Number(cleanedPopulationOverTime[2].date16),
+                                        //                         Number(cleanedPopulationOverTime[2].date17), Number(cleanedPopulationOverTime[2].date18),
+                                        //                         Number(cleanedPopulationOverTime[2].date19), Number(cleanedPopulationOverTime[2].date20),
+                                        //                         Number(cleanedPopulationOverTime[2].date21), Number(cleanedPopulationOverTime[2].date22),
+                                        //                         Number(cleanedPopulationOverTime[2].date23)
+                                        //                     ]
+                                        //                 }]
+                                        //             }, null, 1, 1).attr({
+                                        //                 zIndex: 4,
+                                        //             }).add();
+                                        //
+                                        //             //center button after render with width value
+                                        //             chart.customBtn.translate(chart.customBtn.x - chart.customBtn.width /2, chart.customBtn.y)
+                                        //         },
+                                        //
+                                        //     }
+                                        // },
+
 
                                     });
 
