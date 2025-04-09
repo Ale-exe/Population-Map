@@ -1,0 +1,42 @@
+body{
+    min-height: 100vh;
+    font-size: 20px;
+}
+#returnToMap{
+    background-color: skyblue;
+    font-family: sans-serif;
+    text-align: center;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+#regionHeadingBox{
+    background-color: aliceblue;
+    width: 100%;
+    font-family: sans-serif;
+    text-align: center;
+    font-size: 25px;
+}
+
+.contentTitle{
+    margin-top: 50px;
+}
+
+.content{
+    width: 25%;
+    background: #eeeeee;
+}
+
+.maincontent{
+    margin: 30px;
+    width: 50%;
+    height: 80vh;
+}
+
+img{
+    display: block;
+    margin: auto;
+    justify-content: center;
+    align-content: center;
+    width: 95%;
+}
