@@ -594,10 +594,6 @@ function createRegionCharts(){
                                 },
 
 
-
-
-
-
                                 series: [{
                                     minPointSize: 10,
                                     innerSize: '20%',
@@ -746,7 +742,8 @@ function createRegionCharts(){
                                         // 'rgba(188, 192, 255)',
                                         // 'rgba(218,222,255)',
                                     ]
-                                }]
+                                }],
+
                             });
 
 
