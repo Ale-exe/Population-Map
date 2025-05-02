@@ -144,7 +144,7 @@ async function mapSettings(title = 'Ages 0-9') {
         },
 
         colors: [
-            'rgba(218,222,255)',
+            'rgba(228,232,255)',
             'rgba(188, 192, 255)',
             'rgba(158, 162, 255)',
             'rgba(121, 132, 255)',
