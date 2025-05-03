@@ -530,6 +530,14 @@ function createRegionCharts(){
                         {name: 'Welsh and British', qty: 0}, {name: 'English only', qty: 0},{name: 'English and British', qty: 0},
                         {name: 'Non-UK', qty: 0}];
 
+                    let identityData2 = [{name: 'British only', qty: 0},{name: 'Welsh only', qty: 0},
+                        {name: 'Welsh and British', qty: 0}, {name: 'English only', qty: 0},{name: 'English and British', qty: 0},
+                        {name: 'Non-UK', qty: 0}];
+
+                    let seriesData = [{name: 'British only', qty: 0},{name: 'Welsh only', qty: 0},
+                        {name: 'Welsh and British', qty: 0}, {name: 'English only', qty: 0},{name: 'English and British', qty: 0},
+                        {name: 'Non-UK', qty: 0}];
+
                     fetch('2021IIdentityByRegion.json')
                         .then(response => {
                             if (!response.ok) {
@@ -564,401 +572,776 @@ function createRegionCharts(){
                                 }
                             }
 
-
-                            Highcharts.chart('chart4', {
-                                chart: {
-                                    type: 'pie'
-                                },
-                                title: {
-                                    text: `2021 Census National Identity of Inhabitants - ${getCookie('clickedMapName')}`,
-                                    style: {
-                                        fontSize: 22
-                                    }
-                                },
-                                subtitle: {
-                                    text: 'Source: <a ' +
-                                        'href="https://statistics.ukdataservice.ac.uk/dataset/england-and-wales-census-2021-rm086-national-identity-by-age"' +
-                                        'target="_blank">England and Wales Census 2021 - National Identity by age</a>'
-                                },
-                                tooltip: {
-                                    headerFormat: '',
-                                    pointFormat: '<span style="color:{point.color}">\u25CF</span> <b> ' +
-                                        '{point.name}</b><br/>' +
-                                        '<b>{point.percentage:.1f}</b>% of Population',
-                                    // 'Area (square km): <b>{point.y}</b><br/>' +
-                                    // 'Population density (people per square km): <b>{point.z}</b><br/>'
-
-                                    style: {
-                                        fontSize: 18
-                                    },
-                                },
-
-
-                                series: [{
-                                    minPointSize: 10,
-                                    innerSize: '20%',
-                                    zMin: 0,
-                                    name: 'countries',
-                                    borderRadius: 10,
-                                    borderColor: '#000000',
-                                    borderWidth: 0.5,
-
-                                    data: [
-                                        {
-                                            color: {
-                                                pattern: {
-                                                    path: {
-                                                        d: 'M 10 10 L 10 10 L 2 8 Z',
-                                                    },
-                                                    backgroundColor: 'rgba(71, 82, 255)',
-                                                    width: 12,
-                                                    height: 9,
-                                                    color: '#000000',
-                                                    opacity: 0.5
-                                                }
-                                            },
-                                            name: identityData[0].name,
-                                            y: identityData[0].qty,
-                                            z: Math.cbrt(Number(identityData[0].qty)) / 10,
-                                        },
-
-                                        {
-                                            color: {
-                                                pattern: {
-                                                    path: {
-                                                        d: "M 10 10 L 10 10 L 10 8 Z",
-                                                    },
-                                                    backgroundColor: 'rgba(121, 132, 255)',
-                                                    width: 20,
-                                                    height: 15,
-                                                    color: '#000000',
-                                                    opacity: 0.5,
-                                                }
-                                            },
-
-                                            name: identityData[1].name,
-                                            y: identityData[1].qty,
-                                            z: Math.cbrt(Number(identityData[1].qty)) / 10,
-                                        },
-
-
-                                        {
-                                            color: {
-                                                pattern: {
-                                                    path: {
-                                                        d: 'M 2 1 L 10 10 L 10 8 Z',
-                                                    },
-                                                    backgroundColor: 'rgba(91, 102, 255)',
-                                                    width: 10,
-                                                    height: 6,
-                                                    color: '#000000',
-                                                    opacity: 0.5
-                                                }
-                                            },
-
-                                            name: identityData[2].name,
-                                            y: identityData[2].qty,
-                                            z: Math.cbrt(Number(identityData[2].qty)) / 10,
-                                        },
-
-
-                                        {
-                                            color: {
-                                                pattern: {
-                                                    path: {
-                                                        d: 'M 1 5 L 10 5 L 2 8 Z',
-                                                    },
-                                                    backgroundColor: 'rgba(158, 162, 255)',
-                                                    width: 1,
-                                                    height: 15,
-                                                    color: '#000000',
-                                                    opacity: 0.5
-                                                }
-                                            },
-
-                                            name: identityData[3].name,
-                                            y: identityData[3].qty,
-                                            z: Math.cbrt(Number(identityData[3].qty)) / 10,
-
-                                        },
-
-
-
-                                        {
-                                            color: {
-                                                pattern: {
-                                                    path: {
-                                                        d: 'M 5 10 L 10 5 L 9 2 Z',
-                                                    },
-                                                    backgroundColor: 'rgba(188, 192, 255)',
-                                                    width: 15,
-                                                    height: 20,
-                                                    color: '#000000',
-                                                    opacity: 0.5
-                                                }
-                                            },
-
-                                            name: identityData[4].name,
-                                            y: identityData[4].qty,
-                                            z: Math.cbrt(Number(identityData[4].qty)) / 10,
-                                        },
-
-
-
-                                        {
-                                            color: {
-                                                pattern: {
-                                                    path: {
-                                                        d: 'M 5 10 L 10 5 L 2 8 Z',
-
-                                                    },
-                                                    backgroundColor: 'rgba(218,222,255)',
-                                                    width: 5,
-                                                    height: 15,
-                                                    color: '#000000',
-                                                    opacity: 0.5
-                                                }
-                                            },
-
-
-                                            name: identityData[5].name,
-                                            y: identityData[5].qty,
-                                            z: Math.cbrt(Number(identityData[5].qty)) / 10,
-
-
-                                        }],
-
-                                    dataLabels: {
-                                        style: {
-                                            fontSize: 16
-                                        }
-                                    },
-
-                                    colors: [
-                                        // 'rgba(71, 82, 255)',
-                                        // 'rgba(91, 102, 255)',
-                                        // 'rgba(121, 132, 255)',
-                                        // 'rgba(158, 162, 255)',
-                                        // 'rgba(188, 192, 255)',
-                                        // 'rgba(218,222,255)',
-                                    ]
-                                }],
-
-                            });
-
-
-                            // ---------------------------------------------------------------------------------------------------------------------------------------
-                            let cleanedPopulationOverTime = [];
-
-                            fetch('10YearCountyPop.json')
+                            fetch('2011IdentityByRegion2.json')
                                 .then(response => {
                                     if (!response.ok) {
                                         throw new Error(`JSON error`);
                                     }
                                     return response.json();
                                 })
-                                .then(jsonData => {
+                                .then(jsondata2 => {
 
-                                    let jsondata = JSON.stringify(jsonData);
+                                    let identData2 = JSON.stringify(jsondata2);
 
-                                    let rawPopOverTime = JSON.parse(jsondata);
+                                    let rawIdentityData2 = JSON.parse(identData2);
 
-                                    for (let i = 0; i< rawPopOverTime.length; i++){
-                                        if (getCookie('clickedMapName') === rawPopOverTime[i].area){
-
-                                            if (rawPopOverTime[i].sex === 'F'){
-                                                cleanedPopulationOverTime.push({sex:'F', date11:rawPopOverTime[i]['2011'], date12:rawPopOverTime[i]['2012'],
-                                                    date13:rawPopOverTime[i]['2013'], date14:rawPopOverTime[i]['2014'], date15:rawPopOverTime[i]['2015'],
-                                                    date16:rawPopOverTime[i]['2016'], date17:rawPopOverTime[i]['2017'], date18:rawPopOverTime[i]['2018'],
-                                                    date19:rawPopOverTime[i]['2019'], date20:rawPopOverTime[i]['2020'],
-                                                    date21:rawPopOverTime[i]['2021'], date22:rawPopOverTime[i]['2022'], date23:rawPopOverTime[i]['2023']})
-                                            } else {
-                                                cleanedPopulationOverTime.push({sex:'M', date11:rawPopOverTime[i]['2011'], date12:rawPopOverTime[i]['2012'],
-                                                    date13:rawPopOverTime[i]['2013'], date14:rawPopOverTime[i]['2014'], date15:rawPopOverTime[i]['2015'],
-                                                    date16:rawPopOverTime[i]['2016'], date17:rawPopOverTime[i]['2017'], date18:rawPopOverTime[i]['2018'],
-                                                    date19:rawPopOverTime[i]['2019'], date20:rawPopOverTime[i]['2020'],
-                                                    date21:rawPopOverTime[i]['2021'], date22:rawPopOverTime[i]['2022'], date23:rawPopOverTime[i]['2023']})
-                                            }
+                                    for (let i = 0; i < rawIdentityData2.length; i++) {
+                                        if (getCookie('clickedMapName') === rawIdentityData2[i].geography) {
+                                            // identityData2[0].qty = Number(rawIdentityData2[i]["National Identity: British only identity; measures: Value"]);
+                                            // identityData2[1].qty = Number(rawIdentityData2[i]["National Identity: Welsh only identity; measures: Value"]);
+                                            // identityData2[2].qty = Number(rawIdentityData2[i]["National Identity: Welsh and British only identity; measures: Value"]);
+                                            // identityData2[3].qty = Number(rawIdentityData2[i]["National Identity: English only identity; measures: Value"]);
+                                            // identityData2[4].qty = Number(rawIdentityData2[i]["National Identity: English and British only identity; measures: Value"]);
+                                            // identityData2[5].qty = Number(rawIdentityData2[i]["National Identity: Other identities only; measures: Value"]);
+                                            identityData2[0].qty = Number(rawIdentityData2[i]["National Identity: UK identities: British / English / Northern Irish / Scottish / Welsh / Cornish identities only: English only identity; measures: Value"]);
+                                            identityData2[1].qty = Number(rawIdentityData2[i]["National Identity: UK identities: British / English / Northern Irish / Scottish / Welsh / Cornish identities only: Welsh only identity; measures: Value"]);
+                                            identityData2[2].qty = Number(rawIdentityData2[i]["National Identity: UK identities: British / English / Northern Irish / Scottish / Welsh / Cornish identities only: Welsh and British only identity; measures: Value"]);
+                                            identityData2[3].qty = Number(rawIdentityData2[i]["National Identity: UK identities: British / English / Northern Irish / Scottish / Welsh / Cornish identities only: British only identity; measures: Value"]);
+                                            identityData2[4].qty = Number(rawIdentityData2[i]["National Identity: UK identities: British / English / Northern Irish / Scottish / Welsh / Cornish identities only: English and British only identity; measures: Value"]);
+                                            identityData2[5].qty = Number(rawIdentityData2[i]["National Identity: Other identities only: Total; measures: Value"]);
                                         }
                                     }
 
-                                    cleanedPopulationOverTime.push({sex:'B',
-                                        date11:Number(cleanedPopulationOverTime[0].date11)+Number(cleanedPopulationOverTime[1].date11),
-                                        date12:Number(cleanedPopulationOverTime[0].date12)+Number(cleanedPopulationOverTime[1].date12),
-                                        date13:Number(cleanedPopulationOverTime[0].date13)+Number(cleanedPopulationOverTime[1].date13),
-                                        date14:Number(cleanedPopulationOverTime[0].date14)+Number(cleanedPopulationOverTime[1].date14),
-                                        date15:Number(cleanedPopulationOverTime[0].date15)+Number(cleanedPopulationOverTime[1].date15),
-                                        date16:Number(cleanedPopulationOverTime[0].date16)+Number(cleanedPopulationOverTime[1].date16),
-                                        date17:Number(cleanedPopulationOverTime[0].date17)+Number(cleanedPopulationOverTime[1].date17),
-                                        date18:Number(cleanedPopulationOverTime[0].date18)+Number(cleanedPopulationOverTime[1].date18),
-                                        date19:Number(cleanedPopulationOverTime[0].date19)+Number(cleanedPopulationOverTime[1].date19),
-                                        date20:Number(cleanedPopulationOverTime[0].date20)+Number(cleanedPopulationOverTime[1].date20),
-                                        date21:Number(cleanedPopulationOverTime[0].date21)+Number(cleanedPopulationOverTime[1].date21),
-                                        date22:Number(cleanedPopulationOverTime[0].date22)+Number(cleanedPopulationOverTime[1].date22),
-                                        date23:Number(cleanedPopulationOverTime[0].date23)+Number(cleanedPopulationOverTime[1].date23)})
 
 
-                                    console.log("cleanedPop/TIME")
-                                    console.log(cleanedPopulationOverTime)
+                                    Highcharts.chart('chart4', {
 
-                                    // let chart = document.getElementById('highcharts-c9yhno7-62')
-                                    // let button = document.createElement('button')
-                                    // chart.append(button)
+                                        // exporting: {
+                                        //     buttons: {
+                                        //         customButton: {
+                                        //             text: '2011',
+                                        //             align:'right',
+                                        //             y: 75,
+                                        //
+                                        //             onclick: function () {
+                                        //                 let thisButton = this.exportSVGElements[2];
+                                        //                 thisButton.setState(2);
+                                        //
+                                        //                 let otherButton = this.exportSVGElements[4];
+                                        //                 otherButton.setState(0);
+                                        //
+                                        //                 let chart = this;
+                                        //                 chart.update({
+                                        //                     title: {
+                                        //                         text: `2011 Census National Identity of Inhabitants - ${getCookie('clickedMapName')}`,
+                                        //                     },
+                                        //                     series: [{
+                                        //                         minPointSize: 10,
+                                        //                         innerSize: '20%',
+                                        //                         zMin: 0,
+                                        //                         name: 'countries',
+                                        //                         borderRadius: 10,
+                                        //                         borderColor: '#000000',
+                                        //                         borderWidth: 0.5,
+                                        //
+                                        //                         data: [
+                                        //                             {
+                                        //                                 name: identityData2[0].name,
+                                        //                                 y: identityData2[0].qty,
+                                        //                                 z: Math.cbrt(Number(identityData2[0].qty)) / 10,
+                                        //                             },
+                                        //
+                                        //                             {
+                                        //                                 name: identityData2[1].name,
+                                        //                                 y: identityData2[1].qty,
+                                        //                                 z: Math.cbrt(Number(identityData2[1].qty)) / 10,
+                                        //                             },
+                                        //
+                                        //                             {
+                                        //                                 name: identityData2[2].name,
+                                        //                                 y: identityData2[2].qty,
+                                        //                                 z: Math.cbrt(Number(identityData2[2].qty)) / 10,
+                                        //                             },
+                                        //
+                                        //                             {
+                                        //                                 name: identityData2[3].name,
+                                        //                                 y: identityData2[3].qty,
+                                        //                                 z: Math.cbrt(Number(identityData2[3].qty)) / 10,
+                                        //
+                                        //                             },
+                                        //
+                                        //                             {
+                                        //                                 name: identityData2[4].name,
+                                        //                                 y: identityData2[4].qty,
+                                        //                                 z: Math.cbrt(Number(identityData2[4].qty)) / 10,
+                                        //                             },
+                                        //
+                                        //                             {
+                                        //                                 name: identityData2[5].name,
+                                        //                                 y: identityData2[5].qty,
+                                        //                                 z: Math.cbrt(Number(identityData2[5].qty)) / 10,
+                                        //
+                                        //
+                                        //                             }],
+                                        //                     }]
+                                        //                 })
+                                        //             },
+                                        //
+                                        //
+                                        //             theme: {
+                                        //                 padding: 10,
+                                        //                 states: {
+                                        //                     normal:{
+                                        //                         fill: '#FFFFFF'
+                                        //                     },
+                                        //                     hover: {
+                                        //                         fill: '#DDDDDD'
+                                        //                     },
+                                        //                     selected: {
+                                        //                         fill: '#DDDDDD'
+                                        //                     },
+                                        //                     disabled:{
+                                        //                         fill: '#FFFFFF'
+                                        //                     }
+                                        //                 }
+                                        //             }
+                                        //         },
+                                        //         customButton2: {
+                                        //             text: '2021',
+                                        //             align:'right',
+                                        //             y: 75,
+                                        //
+                                        //             onclick: function () {
+                                        //                 let thisButton = this.exportSVGElements[4];
+                                        //                 thisButton.setState(2);
+                                        //
+                                        //                 let otherButton = this.exportSVGElements[2];
+                                        //                 otherButton.setState(0);
+                                        //
+                                        //
+                                        //
+                                        //                 let chart = this;
+                                        //                 chart.update({
+                                        //                     title: {
+                                        //                         text: `2021 Census National Identity of Inhabitants - ${getCookie('clickedMapName')}`,
+                                        //                     },
+                                        //                     series: [{
+                                        //                         minPointSize: 10,
+                                        //                         innerSize: '20%',
+                                        //                         zMin: 0,
+                                        //                         name: 'countries',
+                                        //                         borderRadius: 10,
+                                        //                         borderColor: '#000000',
+                                        //                         borderWidth: 0.5,
+                                        //
+                                        //                         data: [
+                                        //                             {
+                                        //                                 name: identityData[0].name,
+                                        //                                 y: identityData[0].qty,
+                                        //                                 z: Math.cbrt(Number(identityData[0].qty)) / 10,
+                                        //                             },
+                                        //
+                                        //                             {
+                                        //                                 name: identityData[1].name,
+                                        //                                 y: identityData[1].qty,
+                                        //                                 z: Math.cbrt(Number(identityData[1].qty)) / 10,
+                                        //                             },
+                                        //
+                                        //                             {
+                                        //                                 name: identityData[2].name,
+                                        //                                 y: identityData[2].qty,
+                                        //                                 z: Math.cbrt(Number(identityData[2].qty)) / 10,
+                                        //                             },
+                                        //
+                                        //                             {
+                                        //                                 name: identityData[3].name,
+                                        //                                 y: identityData[3].qty,
+                                        //                                 z: Math.cbrt(Number(identityData[3].qty)) / 10,
+                                        //
+                                        //                             },
+                                        //
+                                        //                             {
+                                        //                                 name: identityData[4].name,
+                                        //                                 y: identityData[4].qty,
+                                        //                                 z: Math.cbrt(Number(identityData[4].qty)) / 10,
+                                        //                             },
+                                        //
+                                        //                             {
+                                        //                                 name: identityData[5].name,
+                                        //                                 y: identityData[5].qty,
+                                        //                                 z: Math.cbrt(Number(identityData[5].qty)) / 10,
+                                        //
+                                        //
+                                        //                             }],
+                                        //                     }]
+                                        //                 })
+                                        //             },
+                                        //             theme: {
+                                        //                 fill: '#DDDDDD',
+                                        //                 padding: 10,
+                                        //                 states: {
+                                        //                     normal:{
+                                        //                         fill: '#FFFFFF'
+                                        //                     },
+                                        //                     hover: {
+                                        //                         fill: '#DDDDDD'
+                                        //                     },
+                                        //                     selected: {
+                                        //                         fill: '#DDDDDD'
+                                        //                     },
+                                        //                     disabled:{
+                                        //                         fill: '#FFFFFF'
+                                        //                     }
+                                        //                 }
+                                        //             }
+                                        //         }
+                                        //     }
+                                        // },
+                                        chart: {
+                                            type: 'pie',
 
 
-                                    Highcharts.chart('chart1', {
+
+
+                                            events: {
+                                                // Creates clickable 2021/2011 buttons to toggle data source
+                                                render() {
+                                                    let chart = this,
+                                                        // positioning for button
+                                                        x = chart.plotWidth / 1.2,
+                                                        y = chart.plotHeight / 4;
+
+
+                                                    if (chart.dataToggleButton) {
+                                                        // destroys button if exists
+                                                        chart.dataToggleButton.destroy();
+                                                    }
+
+                                                    if (chart.dataToggleButton2) {
+                                                        chart.dataToggleButton2.destroy();
+                                                    }
+
+                                                    const stylesSelected = {
+                                                        fill: '#DDDDDD',
+                                                    };
+
+                                                    const styleHover = {
+                                                        fill: '#F8F8F8',
+                                                    }
+
+                                                    const stylesUnselected = {
+                                                        fill: '#FFFFFF',
+                                                    };
+
+                                                    chart.dataToggleButton = chart.renderer.button('2011 Data', x, y, function () {
+
+
+                                                        chart.update({
+                                                            title: {
+                                                                text: `2011 Census National Identity of Inhabitants - ${getCookie('clickedMapName')}`,
+                                                            },
+                                                            series: [{
+                                                                minPointSize: 10,
+                                                                innerSize: '20%',
+                                                                zMin: 0,
+                                                                name: 'countries',
+                                                                borderRadius: 10,
+                                                                borderColor: '#000000',
+                                                                borderWidth: 0.5,
+
+                                                                data: [
+                                                                    {
+                                                                        name: identityData2[0].name,
+                                                                        y: identityData2[0].qty,
+                                                                        z: Math.cbrt(Number(identityData2[0].qty)) / 10,
+                                                                    },
+
+                                                                    {
+                                                                        name: identityData2[1].name,
+                                                                        y: identityData2[1].qty,
+                                                                        z: Math.cbrt(Number(identityData2[1].qty)) / 10,
+                                                                    },
+
+                                                                    {
+                                                                        name: identityData2[2].name,
+                                                                        y: identityData2[2].qty,
+                                                                        z: Math.cbrt(Number(identityData2[2].qty)) / 10,
+                                                                    },
+
+                                                                    {
+                                                                        name: identityData2[3].name,
+                                                                        y: identityData2[3].qty,
+                                                                        z: Math.cbrt(Number(identityData2[3].qty)) / 10,
+
+                                                                    },
+
+                                                                    {
+                                                                        name: identityData2[4].name,
+                                                                        y: identityData2[4].qty,
+                                                                        z: Math.cbrt(Number(identityData2[4].qty)) / 10,
+                                                                    },
+
+                                                                    {
+                                                                        name: identityData2[5].name,
+                                                                        y: identityData2[5].qty,
+                                                                        z: Math.cbrt(Number(identityData2[5].qty)) / 10,
+
+
+                                                                    }],
+                                                            }]
+                                                        })
+                                                        // 2011 - default, hoverstate    , selected state
+                                                    }, stylesUnselected, styleHover, stylesSelected).attr({
+                                                        zIndex: 4,
+                                                    }).add();
+
+                                                    //center button after render with width value
+                                                    chart.dataToggleButton.translate(chart.dataToggleButton.x + chart.dataToggleButton.width / 2, chart.dataToggleButton.y)
+
+
+
+                                                    chart.dataToggleButton2 = chart.renderer.button('2021 Data', x, y, function () {
+                                                        chart.update({
+                                                            title: {
+                                                                text: `2021 Census National Identity of Inhabitants - ${getCookie('clickedMapName')}`,
+                                                            },
+                                                            series: [{
+                                                                minPointSize: 10,
+                                                                innerSize: '20%',
+                                                                zMin: 0,
+                                                                name: 'countries',
+                                                                borderRadius: 10,
+                                                                borderColor: '#000000',
+                                                                borderWidth: 0.5,
+
+                                                                data: [
+                                                                    {
+                                                                        name: identityData[0].name,
+                                                                        y: identityData[0].qty,
+                                                                        z: Math.cbrt(Number(identityData[0].qty)) / 10,
+                                                                    },
+
+                                                                    {
+                                                                        name: identityData[1].name,
+                                                                        y: identityData[1].qty,
+                                                                        z: Math.cbrt(Number(identityData[1].qty)) / 10,
+                                                                    },
+
+                                                                    {
+                                                                        name: identityData[2].name,
+                                                                        y: identityData[2].qty,
+                                                                        z: Math.cbrt(Number(identityData[2].qty)) / 10,
+                                                                    },
+
+                                                                    {
+                                                                        name: identityData[3].name,
+                                                                        y: identityData[3].qty,
+                                                                        z: Math.cbrt(Number(identityData[3].qty)) / 10,
+
+                                                                    },
+
+                                                                    {
+                                                                        name: identityData[4].name,
+                                                                        y: identityData[4].qty,
+                                                                        z: Math.cbrt(Number(identityData[4].qty)) / 10,
+                                                                    },
+
+                                                                    {
+                                                                        name: identityData[5].name,
+                                                                        y: identityData[5].qty,
+                                                                        z: Math.cbrt(Number(identityData[5].qty)) / 10,
+
+
+                                                                    }],
+                                                            }]
+                                                        })
+
+                                                        for (let i = 0; i < identityData.length; i++) {
+                                                            console.log("data = " + identityData[i].qty);
+                                                        }
+
+                                                    }, stylesUnselected, stylesSelected, stylesSelected).attr({
+                                                        zIndex: 4,
+                                                    }).add();
+
+                                                    //center button after render with width value
+                                                    chart.dataToggleButton2.translate(chart.dataToggleButton2.x - chart.dataToggleButton2.width / 2, chart.dataToggleButton2.y)
+                                                },
+                                            }
+
+
+
+
+
+
+
+
+
+                                        },
                                         title: {
-                                            text: `Population Change Over Time by Gender- ${getCookie('clickedMapName')}`,
-
-                                            style:{
-                                                fontSize: 22,
+                                            text: `2021 Census National Identity of Inhabitants - ${getCookie('clickedMapName')}`,
+                                            style: {
+                                                fontSize: 22
                                             }
                                         },
                                         subtitle: {
-                                            text:
-                                                'Source: <a target="_blank" ' +
-                                                'href="https://www.ons.gov.uk/peoplepopulationandcommunity/populationandmigration/populationestimates/datasets/estimatesofthepopulationforenglandandwales">Office for National Statistics - Estimates of the population for England and Wales 2011-2023</a>'
+                                            text: 'Source: <a ' +
+                                                'href="https://statistics.ukdataservice.ac.uk/dataset/england-and-wales-census-2021-rm086-national-identity-by-age"' +
+                                                'target="_blank">England and Wales Census 2021 - National Identity by age</a>'
                                         },
-
-                                        yAxis: {
-                                            title: {
-                                                text: '# of Individuals Residing',
-
-                                                style:{
-                                                    fontSize: 16,
-                                                    fontWeight: 'bold',
-                                                }
-                                            },
-                                            labels:{
-                                                style:{
-                                                    fontSize: 15,
-                                                }
-                                            }
-                                        },
-
-                                        xAxis: {
-                                            title:{
-                                                text: 'Year',
-                                                style:{
-                                                    fontSize: 16,
-                                                    fontWeight: 'bold',
-
-                                                }
-                                            },
-                                            categories: [
-                                                '2011', '2012', '2013', '2014', '2015', '2016', '2017', '2018', '2019',
-                                                '2020', '2021', '2022', '2023'
-                                            ],
-                                            accessibility: {
-                                                rangeDescription: 'Years: 2011 to 2023'
-                                            }
-                                        },
-
                                         tooltip: {
-                                            format: "<b>Year: {point.category}</b><br> <span style=\"color:{point.series.color}\">\u25CF</span> {series.name} Population: <b>{point.y}</b>",
+                                            headerFormat: '',
+                                            pointFormat: '<span style="color:{point.color}">\u25CF</span> <b> ' +
+                                                '{point.name}</b><br/>' +
+                                                '<b>{point.percentage:.1f}</b>% of Population',
+                                            // 'Area (square km): <b>{point.y}</b><br/>' +
+                                            // 'Population density (people per square km): <b>{point.z}</b><br/>'
 
-                                            style:{
-                                                fontSize: 18,
-                                                fontWeight: 'normal',
+                                            style: {
+                                                fontSize: 18
                                             },
                                         },
 
-                                        legend: {
-                                            layout: 'horizontal',
-                                            align: 'center',
-                                            verticalAlign: 'bottom',
-                                            margin: 0,
-                                            x: 34
-                                        },
-
-                                        plotOptions: {
-                                            series: {
-                                                label: {
-                                                    connectorAllowed: false
-                                                },
-                                                dashStyle: 'ShortDash'
-                                            }
-                                        },
 
                                         series: [{
-                                            name: 'Male',
-                                            data: [
-                                                Number(cleanedPopulationOverTime[1].date11), Number(cleanedPopulationOverTime[1].date12),
-                                                Number(cleanedPopulationOverTime[1].date13), Number(cleanedPopulationOverTime[1].date14),
-                                                Number(cleanedPopulationOverTime[1].date15), Number(cleanedPopulationOverTime[1].date16),
-                                                Number(cleanedPopulationOverTime[1].date17), Number(cleanedPopulationOverTime[1].date18),
-                                                Number(cleanedPopulationOverTime[1].date19), Number(cleanedPopulationOverTime[1].date20),
-                                                Number(cleanedPopulationOverTime[1].date21), Number(cleanedPopulationOverTime[1].date22),
-                                                Number(cleanedPopulationOverTime[1].date23)
-                                            ]
-                                        }, {
-                                            name: 'Female',
-                                            data: [
-                                                Number(cleanedPopulationOverTime[0].date11), Number(cleanedPopulationOverTime[0].date12),
-                                                Number(cleanedPopulationOverTime[0].date13), Number(cleanedPopulationOverTime[0].date14),
-                                                Number(cleanedPopulationOverTime[0].date15), Number(cleanedPopulationOverTime[0].date16),
-                                                Number(cleanedPopulationOverTime[0].date17), Number(cleanedPopulationOverTime[0].date18),
-                                                Number(cleanedPopulationOverTime[0].date19), Number(cleanedPopulationOverTime[0].date20),
-                                                Number(cleanedPopulationOverTime[0].date21), Number(cleanedPopulationOverTime[0].date22),
-                                                Number(cleanedPopulationOverTime[0].date23)
-                                            ]
-                                        }, ],
+                                            minPointSize: 10,
+                                            innerSize: '20%',
+                                            zMin: 0,
+                                            name: 'countries',
+                                            borderRadius: 10,
+                                            borderColor: '#000000',
+                                            borderWidth: 0.5,
 
-                                        responsive: {
-                                            rules: [{
-                                                condition: {
-                                                    maxWidth: 500
+                                            data: [
+                                                {
+                                                    color: {
+                                                        pattern: {
+                                                            path: {
+                                                                d: 'M 10 10 L 10 10 L 2 8 Z',
+                                                            },
+                                                            backgroundColor: 'rgba(71, 82, 255)',
+                                                            width: 12,
+                                                            height: 9,
+                                                            color: '#000000',
+                                                            opacity: 0.5
+                                                        }
+                                                    },
+                                                    name: identityData[0].name,
+                                                    y: identityData[0].qty,
+                                                    z: Math.cbrt(Number(identityData[0].qty)) / 10,
                                                 },
-                                                chartOptions: {
-                                                    legend: {
-                                                        layout: 'horizontal',
-                                                        align: 'center',
-                                                        verticalAlign: 'bottom',
+
+                                                {
+                                                    color: {
+                                                        pattern: {
+                                                            path: {
+                                                                d: "M 10 10 L 10 10 L 10 8 Z",
+                                                            },
+                                                            backgroundColor: 'rgba(121, 132, 255)',
+                                                            width: 20,
+                                                            height: 15,
+                                                            color: '#000000',
+                                                            opacity: 0.5,
+                                                        }
+                                                    },
+
+                                                    name: identityData[1].name,
+                                                    y: identityData[1].qty,
+                                                    z: Math.cbrt(Number(identityData[1].qty)) / 10,
+                                                },
+
+
+                                                {
+                                                    color: {
+                                                        pattern: {
+                                                            path: {
+                                                                d: 'M 2 1 L 10 10 L 10 8 Z',
+                                                            },
+                                                            backgroundColor: 'rgba(91, 102, 255)',
+                                                            width: 10,
+                                                            height: 6,
+                                                            color: '#000000',
+                                                            opacity: 0.5
+                                                        }
+                                                    },
+
+                                                    name: identityData[2].name,
+                                                    y: identityData[2].qty,
+                                                    z: Math.cbrt(Number(identityData[2].qty)) / 10,
+                                                },
+
+
+                                                {
+                                                    color: {
+                                                        pattern: {
+                                                            path: {
+                                                                d: 'M 1 5 L 10 5 L 2 8 Z',
+                                                            },
+                                                            backgroundColor: 'rgba(158, 162, 255)',
+                                                            width: 1,
+                                                            height: 15,
+                                                            color: '#000000',
+                                                            opacity: 0.5
+                                                        }
+                                                    },
+
+                                                    name: identityData[3].name,
+                                                    y: identityData[3].qty,
+                                                    z: Math.cbrt(Number(identityData[3].qty)) / 10,
+
+                                                },
+
+
+                                                {
+                                                    color: {
+                                                        pattern: {
+                                                            path: {
+                                                                d: 'M 5 10 L 10 5 L 9 2 Z',
+                                                            },
+                                                            backgroundColor: 'rgba(188, 192, 255)',
+                                                            width: 15,
+                                                            height: 20,
+                                                            color: '#000000',
+                                                            opacity: 0.5
+                                                        }
+                                                    },
+
+                                                    name: identityData[4].name,
+                                                    y: identityData[4].qty,
+                                                    z: Math.cbrt(Number(identityData[4].qty)) / 10,
+                                                },
+
+
+                                                {
+                                                    color: {
+                                                        pattern: {
+                                                            path: {
+                                                                d: 'M 5 10 L 10 5 L 2 8 Z',
+
+                                                            },
+                                                            backgroundColor: 'rgba(218,222,255)',
+                                                            width: 5,
+                                                            height: 15,
+                                                            color: '#000000',
+                                                            opacity: 0.5
+                                                        }
+                                                    },
+
+
+                                                    name: identityData[5].name,
+                                                    y: identityData[5].qty,
+                                                    z: Math.cbrt(Number(identityData[5].qty)) / 10,
+
+
+                                                }],
+
+                                            dataLabels: {
+                                                style: {
+                                                    fontSize: 16
+                                                }
+                                            },
+
+                                        }],
+
+                                    },
+                                        function(chart) {
+
+                                                // positioning for label - Census Years
+                                                let x = chart.plotWidth / 1.15;
+                                                let y = chart.plotHeight / 5.9;
+                                            chart.renderer.label('Census year', x, y,'callout')
+                                                .attr({
+                                                    fontSize: 12,
+                                                    fill: '#FFFFFF',
+                                                })
+                                                .add();
+                                        });
+
+
+                                    // ---------------------------------------------------------------------------------------------------------------------------------------
+                                    let cleanedPopulationOverTime = [];
+
+                                    fetch('10YearCountyPop.json')
+                                        .then(response => {
+                                            if (!response.ok) {
+                                                throw new Error(`JSON error`);
+                                            }
+                                            return response.json();
+                                        })
+                                        .then(jsonData => {
+
+                                            let jsondata = JSON.stringify(jsonData);
+
+                                            let rawPopOverTime = JSON.parse(jsondata);
+
+                                            for (let i = 0; i < rawPopOverTime.length; i++) {
+                                                if (getCookie('clickedMapName') === rawPopOverTime[i].area) {
+
+                                                    if (rawPopOverTime[i].sex === 'F') {
+                                                        cleanedPopulationOverTime.push({
+                                                            sex: 'F',
+                                                            date11: rawPopOverTime[i]['2011'],
+                                                            date12: rawPopOverTime[i]['2012'],
+                                                            date13: rawPopOverTime[i]['2013'],
+                                                            date14: rawPopOverTime[i]['2014'],
+                                                            date15: rawPopOverTime[i]['2015'],
+                                                            date16: rawPopOverTime[i]['2016'],
+                                                            date17: rawPopOverTime[i]['2017'],
+                                                            date18: rawPopOverTime[i]['2018'],
+                                                            date19: rawPopOverTime[i]['2019'],
+                                                            date20: rawPopOverTime[i]['2020'],
+                                                            date21: rawPopOverTime[i]['2021'],
+                                                            date22: rawPopOverTime[i]['2022'],
+                                                            date23: rawPopOverTime[i]['2023']
+                                                        })
+                                                    } else {
+                                                        cleanedPopulationOverTime.push({
+                                                            sex: 'M',
+                                                            date11: rawPopOverTime[i]['2011'],
+                                                            date12: rawPopOverTime[i]['2012'],
+                                                            date13: rawPopOverTime[i]['2013'],
+                                                            date14: rawPopOverTime[i]['2014'],
+                                                            date15: rawPopOverTime[i]['2015'],
+                                                            date16: rawPopOverTime[i]['2016'],
+                                                            date17: rawPopOverTime[i]['2017'],
+                                                            date18: rawPopOverTime[i]['2018'],
+                                                            date19: rawPopOverTime[i]['2019'],
+                                                            date20: rawPopOverTime[i]['2020'],
+                                                            date21: rawPopOverTime[i]['2021'],
+                                                            date22: rawPopOverTime[i]['2022'],
+                                                            date23: rawPopOverTime[i]['2023']
+                                                        })
                                                     }
                                                 }
+                                            }
 
-                                            }]
-                                        },
-
-                                        // chart: {
-                                        //     events: {
-                                        //         render() {
-                                        //             let chart = this,
-                                        //                 x = chart.plotWidth /20,
-                                        //                 y = chart.plotHeight *1.5;
-                                        //
-                                        //             if (chart.customBtn) {
-                                        //                 chart.customBtn.destroy();
-                                        //             }
-                                        //
-                                        //             chart.customBtn = chart.renderer.button('Reset', x, y, function() {
-                                        //                 console.log("pressed");
-                                        //                 chart.series.setData = [{
-                                        //                     name: 'Both',
-                                        //                     data: [
-                                        //                         Number(cleanedPopulationOverTime[2].date11), Number(cleanedPopulationOverTime[2].date12),
-                                        //                         Number(cleanedPopulationOverTime[2].date13), Number(cleanedPopulationOverTime[2].date14),
-                                        //                         Number(cleanedPopulationOverTime[2].date15), Number(cleanedPopulationOverTime[2].date16),
-                                        //                         Number(cleanedPopulationOverTime[2].date17), Number(cleanedPopulationOverTime[2].date18),
-                                        //                         Number(cleanedPopulationOverTime[2].date19), Number(cleanedPopulationOverTime[2].date20),
-                                        //                         Number(cleanedPopulationOverTime[2].date21), Number(cleanedPopulationOverTime[2].date22),
-                                        //                         Number(cleanedPopulationOverTime[2].date23)
-                                        //                     ]
-                                        //                 }]
-                                        //             }, null, 1, 1).attr({
-                                        //                 zIndex: 4,
-                                        //             }).add();
-                                        //
-                                        //             //center button after render with width value
-                                        //             chart.customBtn.translate(chart.customBtn.x - chart.customBtn.width /2, chart.customBtn.y)
-                                        //         },
-                                        //
-                                        //     }
-                                        // },
+                                            cleanedPopulationOverTime.push({
+                                                sex: 'B',
+                                                date11: Number(cleanedPopulationOverTime[0].date11) + Number(cleanedPopulationOverTime[1].date11),
+                                                date12: Number(cleanedPopulationOverTime[0].date12) + Number(cleanedPopulationOverTime[1].date12),
+                                                date13: Number(cleanedPopulationOverTime[0].date13) + Number(cleanedPopulationOverTime[1].date13),
+                                                date14: Number(cleanedPopulationOverTime[0].date14) + Number(cleanedPopulationOverTime[1].date14),
+                                                date15: Number(cleanedPopulationOverTime[0].date15) + Number(cleanedPopulationOverTime[1].date15),
+                                                date16: Number(cleanedPopulationOverTime[0].date16) + Number(cleanedPopulationOverTime[1].date16),
+                                                date17: Number(cleanedPopulationOverTime[0].date17) + Number(cleanedPopulationOverTime[1].date17),
+                                                date18: Number(cleanedPopulationOverTime[0].date18) + Number(cleanedPopulationOverTime[1].date18),
+                                                date19: Number(cleanedPopulationOverTime[0].date19) + Number(cleanedPopulationOverTime[1].date19),
+                                                date20: Number(cleanedPopulationOverTime[0].date20) + Number(cleanedPopulationOverTime[1].date20),
+                                                date21: Number(cleanedPopulationOverTime[0].date21) + Number(cleanedPopulationOverTime[1].date21),
+                                                date22: Number(cleanedPopulationOverTime[0].date22) + Number(cleanedPopulationOverTime[1].date22),
+                                                date23: Number(cleanedPopulationOverTime[0].date23) + Number(cleanedPopulationOverTime[1].date23)
+                                            })
 
 
-                                    });
+                                            console.log("cleanedPop/TIME")
+                                            console.log(cleanedPopulationOverTime)
 
+                                            Highcharts.chart('chart1', {
+                                                title: {
+                                                    text: `Population Change Over Time by Gender- ${getCookie('clickedMapName')}`,
+
+                                                    style: {
+                                                        fontSize: 22,
+                                                    }
+                                                },
+                                                subtitle: {
+                                                    text:
+                                                        'Source: <a target="_blank" ' +
+                                                        'href="https://www.ons.gov.uk/peoplepopulationandcommunity/populationandmigration/populationestimates/datasets/estimatesofthepopulationforenglandandwales">Office for National Statistics - Estimates of the population for England and Wales 2011-2023</a>'
+                                                },
+
+                                                yAxis: {
+                                                    title: {
+                                                        text: '# of Individuals Residing',
+
+                                                        style: {
+                                                            fontSize: 16,
+                                                            fontWeight: 'bold',
+                                                        }
+                                                    },
+                                                    labels: {
+                                                        style: {
+                                                            fontSize: 15,
+                                                        }
+                                                    }
+                                                },
+
+                                                xAxis: {
+                                                    title: {
+                                                        text: 'Year',
+                                                        style: {
+                                                            fontSize: 16,
+                                                            fontWeight: 'bold',
+
+                                                        }
+                                                    },
+                                                    categories: [
+                                                        '2011', '2012', '2013', '2014', '2015', '2016', '2017', '2018', '2019',
+                                                        '2020', '2021', '2022', '2023'
+                                                    ],
+                                                    accessibility: {
+                                                        rangeDescription: 'Years: 2011 to 2023'
+                                                    }
+                                                },
+
+                                                tooltip: {
+                                                    format: "<b>Year: {point.category}</b><br> <span style=\"color:{point.series.color}\">\u25CF</span> {series.name} Population: <b>{point.y}</b>",
+
+                                                    style: {
+                                                        fontSize: 18,
+                                                        fontWeight: 'normal',
+                                                    },
+                                                },
+
+                                                legend: {
+                                                    layout: 'horizontal',
+                                                    align: 'center',
+                                                    verticalAlign: 'bottom',
+                                                    margin: 0,
+                                                    x: 34
+                                                },
+
+                                                plotOptions: {
+                                                    series: {
+                                                        label: {
+                                                            connectorAllowed: false
+                                                        },
+                                                        dashStyle: 'ShortDash'
+                                                    }
+                                                },
+
+                                                series: [{
+                                                    name: 'Male',
+                                                    data: [
+                                                        Number(cleanedPopulationOverTime[1].date11), Number(cleanedPopulationOverTime[1].date12),
+                                                        Number(cleanedPopulationOverTime[1].date13), Number(cleanedPopulationOverTime[1].date14),
+                                                        Number(cleanedPopulationOverTime[1].date15), Number(cleanedPopulationOverTime[1].date16),
+                                                        Number(cleanedPopulationOverTime[1].date17), Number(cleanedPopulationOverTime[1].date18),
+                                                        Number(cleanedPopulationOverTime[1].date19), Number(cleanedPopulationOverTime[1].date20),
+                                                        Number(cleanedPopulationOverTime[1].date21), Number(cleanedPopulationOverTime[1].date22),
+                                                        Number(cleanedPopulationOverTime[1].date23)
+                                                    ]
+                                                }, {
+                                                    name: 'Female',
+                                                    data: [
+                                                        Number(cleanedPopulationOverTime[0].date11), Number(cleanedPopulationOverTime[0].date12),
+                                                        Number(cleanedPopulationOverTime[0].date13), Number(cleanedPopulationOverTime[0].date14),
+                                                        Number(cleanedPopulationOverTime[0].date15), Number(cleanedPopulationOverTime[0].date16),
+                                                        Number(cleanedPopulationOverTime[0].date17), Number(cleanedPopulationOverTime[0].date18),
+                                                        Number(cleanedPopulationOverTime[0].date19), Number(cleanedPopulationOverTime[0].date20),
+                                                        Number(cleanedPopulationOverTime[0].date21), Number(cleanedPopulationOverTime[0].date22),
+                                                        Number(cleanedPopulationOverTime[0].date23)
+                                                    ]
+                                                },],
+
+                                                responsive: {
+                                                    rules: [{
+                                                        condition: {
+                                                            maxWidth: 500
+                                                        },
+                                                        chartOptions: {
+                                                            legend: {
+                                                                layout: 'horizontal',
+                                                                align: 'center',
+                                                                verticalAlign: 'bottom',
+                                                            }
+                                                        }
+
+                                                    }]
+                                                },
+                                            });
+
+                                        })
                                 })
                         })
                 })
