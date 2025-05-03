@@ -587,12 +587,6 @@ function createRegionCharts(){
 
                                     for (let i = 0; i < rawIdentityData2.length; i++) {
                                         if (getCookie('clickedMapName') === rawIdentityData2[i].geography) {
-                                            // identityData2[0].qty = Number(rawIdentityData2[i]["National Identity: British only identity; measures: Value"]);
-                                            // identityData2[1].qty = Number(rawIdentityData2[i]["National Identity: Welsh only identity; measures: Value"]);
-                                            // identityData2[2].qty = Number(rawIdentityData2[i]["National Identity: Welsh and British only identity; measures: Value"]);
-                                            // identityData2[3].qty = Number(rawIdentityData2[i]["National Identity: English only identity; measures: Value"]);
-                                            // identityData2[4].qty = Number(rawIdentityData2[i]["National Identity: English and British only identity; measures: Value"]);
-                                            // identityData2[5].qty = Number(rawIdentityData2[i]["National Identity: Other identities only; measures: Value"]);
                                             identityData2[0].qty = Number(rawIdentityData2[i]["National Identity: UK identities: British / English / Northern Irish / Scottish / Welsh / Cornish identities only: English only identity; measures: Value"]);
                                             identityData2[1].qty = Number(rawIdentityData2[i]["National Identity: UK identities: British / English / Northern Irish / Scottish / Welsh / Cornish identities only: Welsh only identity; measures: Value"]);
                                             identityData2[2].qty = Number(rawIdentityData2[i]["National Identity: UK identities: British / English / Northern Irish / Scottish / Welsh / Cornish identities only: Welsh and British only identity; measures: Value"]);
@@ -605,368 +599,8 @@ function createRegionCharts(){
 
 
                                     Highcharts.chart('chart4', {
-
-                                        // exporting: {
-                                        //     buttons: {
-                                        //         customButton: {
-                                        //             text: '2011',
-                                        //             align:'right',
-                                        //             y: 75,
-                                        //
-                                        //             onclick: function () {
-                                        //                 let thisButton = this.exportSVGElements[2];
-                                        //                 thisButton.setState(2);
-                                        //
-                                        //                 let otherButton = this.exportSVGElements[4];
-                                        //                 otherButton.setState(0);
-                                        //
-                                        //                 let chart = this;
-                                        //                 chart.update({
-                                        //                     title: {
-                                        //                         text: `2011 Census National Identity of Inhabitants - ${getCookie('clickedMapName')}`,
-                                        //                     },
-                                        //                     series: [{
-                                        //                         minPointSize: 10,
-                                        //                         innerSize: '20%',
-                                        //                         zMin: 0,
-                                        //                         name: 'countries',
-                                        //                         borderRadius: 10,
-                                        //                         borderColor: '#000000',
-                                        //                         borderWidth: 0.5,
-                                        //
-                                        //                         data: [
-                                        //                             {
-                                        //                                 name: identityData2[0].name,
-                                        //                                 y: identityData2[0].qty,
-                                        //                                 z: Math.cbrt(Number(identityData2[0].qty)) / 10,
-                                        //                             },
-                                        //
-                                        //                             {
-                                        //                                 name: identityData2[1].name,
-                                        //                                 y: identityData2[1].qty,
-                                        //                                 z: Math.cbrt(Number(identityData2[1].qty)) / 10,
-                                        //                             },
-                                        //
-                                        //                             {
-                                        //                                 name: identityData2[2].name,
-                                        //                                 y: identityData2[2].qty,
-                                        //                                 z: Math.cbrt(Number(identityData2[2].qty)) / 10,
-                                        //                             },
-                                        //
-                                        //                             {
-                                        //                                 name: identityData2[3].name,
-                                        //                                 y: identityData2[3].qty,
-                                        //                                 z: Math.cbrt(Number(identityData2[3].qty)) / 10,
-                                        //
-                                        //                             },
-                                        //
-                                        //                             {
-                                        //                                 name: identityData2[4].name,
-                                        //                                 y: identityData2[4].qty,
-                                        //                                 z: Math.cbrt(Number(identityData2[4].qty)) / 10,
-                                        //                             },
-                                        //
-                                        //                             {
-                                        //                                 name: identityData2[5].name,
-                                        //                                 y: identityData2[5].qty,
-                                        //                                 z: Math.cbrt(Number(identityData2[5].qty)) / 10,
-                                        //
-                                        //
-                                        //                             }],
-                                        //                     }]
-                                        //                 })
-                                        //             },
-                                        //
-                                        //
-                                        //             theme: {
-                                        //                 padding: 10,
-                                        //                 states: {
-                                        //                     normal:{
-                                        //                         fill: '#FFFFFF'
-                                        //                     },
-                                        //                     hover: {
-                                        //                         fill: '#DDDDDD'
-                                        //                     },
-                                        //                     selected: {
-                                        //                         fill: '#DDDDDD'
-                                        //                     },
-                                        //                     disabled:{
-                                        //                         fill: '#FFFFFF'
-                                        //                     }
-                                        //                 }
-                                        //             }
-                                        //         },
-                                        //         customButton2: {
-                                        //             text: '2021',
-                                        //             align:'right',
-                                        //             y: 75,
-                                        //
-                                        //             onclick: function () {
-                                        //                 let thisButton = this.exportSVGElements[4];
-                                        //                 thisButton.setState(2);
-                                        //
-                                        //                 let otherButton = this.exportSVGElements[2];
-                                        //                 otherButton.setState(0);
-                                        //
-                                        //
-                                        //
-                                        //                 let chart = this;
-                                        //                 chart.update({
-                                        //                     title: {
-                                        //                         text: `2021 Census National Identity of Inhabitants - ${getCookie('clickedMapName')}`,
-                                        //                     },
-                                        //                     series: [{
-                                        //                         minPointSize: 10,
-                                        //                         innerSize: '20%',
-                                        //                         zMin: 0,
-                                        //                         name: 'countries',
-                                        //                         borderRadius: 10,
-                                        //                         borderColor: '#000000',
-                                        //                         borderWidth: 0.5,
-                                        //
-                                        //                         data: [
-                                        //                             {
-                                        //                                 name: identityData[0].name,
-                                        //                                 y: identityData[0].qty,
-                                        //                                 z: Math.cbrt(Number(identityData[0].qty)) / 10,
-                                        //                             },
-                                        //
-                                        //                             {
-                                        //                                 name: identityData[1].name,
-                                        //                                 y: identityData[1].qty,
-                                        //                                 z: Math.cbrt(Number(identityData[1].qty)) / 10,
-                                        //                             },
-                                        //
-                                        //                             {
-                                        //                                 name: identityData[2].name,
-                                        //                                 y: identityData[2].qty,
-                                        //                                 z: Math.cbrt(Number(identityData[2].qty)) / 10,
-                                        //                             },
-                                        //
-                                        //                             {
-                                        //                                 name: identityData[3].name,
-                                        //                                 y: identityData[3].qty,
-                                        //                                 z: Math.cbrt(Number(identityData[3].qty)) / 10,
-                                        //
-                                        //                             },
-                                        //
-                                        //                             {
-                                        //                                 name: identityData[4].name,
-                                        //                                 y: identityData[4].qty,
-                                        //                                 z: Math.cbrt(Number(identityData[4].qty)) / 10,
-                                        //                             },
-                                        //
-                                        //                             {
-                                        //                                 name: identityData[5].name,
-                                        //                                 y: identityData[5].qty,
-                                        //                                 z: Math.cbrt(Number(identityData[5].qty)) / 10,
-                                        //
-                                        //
-                                        //                             }],
-                                        //                     }]
-                                        //                 })
-                                        //             },
-                                        //             theme: {
-                                        //                 fill: '#DDDDDD',
-                                        //                 padding: 10,
-                                        //                 states: {
-                                        //                     normal:{
-                                        //                         fill: '#FFFFFF'
-                                        //                     },
-                                        //                     hover: {
-                                        //                         fill: '#DDDDDD'
-                                        //                     },
-                                        //                     selected: {
-                                        //                         fill: '#DDDDDD'
-                                        //                     },
-                                        //                     disabled:{
-                                        //                         fill: '#FFFFFF'
-                                        //                     }
-                                        //                 }
-                                        //             }
-                                        //         }
-                                        //     }
-                                        // },
                                         chart: {
                                             type: 'pie',
-
-
-
-
-                                            events: {
-                                                // Creates clickable 2021/2011 buttons to toggle data source
-                                                render() {
-                                                    let chart = this,
-                                                        // positioning for button
-                                                        x = chart.plotWidth / 1.2,
-                                                        y = chart.plotHeight / 4;
-
-
-                                                    if (chart.dataToggleButton) {
-                                                        // destroys button if exists
-                                                        chart.dataToggleButton.destroy();
-                                                    }
-
-                                                    if (chart.dataToggleButton2) {
-                                                        chart.dataToggleButton2.destroy();
-                                                    }
-
-                                                    const stylesSelected = {
-                                                        fill: '#DDDDDD',
-                                                    };
-
-                                                    const styleHover = {
-                                                        fill: '#F8F8F8',
-                                                    }
-
-                                                    const stylesUnselected = {
-                                                        fill: '#FFFFFF',
-                                                    };
-
-                                                    chart.dataToggleButton = chart.renderer.button('2011 Data', x, y, function () {
-
-
-                                                        chart.update({
-                                                            title: {
-                                                                text: `2011 Census National Identity of Inhabitants - ${getCookie('clickedMapName')}`,
-                                                            },
-                                                            series: [{
-                                                                minPointSize: 10,
-                                                                innerSize: '20%',
-                                                                zMin: 0,
-                                                                name: 'countries',
-                                                                borderRadius: 10,
-                                                                borderColor: '#000000',
-                                                                borderWidth: 0.5,
-
-                                                                data: [
-                                                                    {
-                                                                        name: identityData2[0].name,
-                                                                        y: identityData2[0].qty,
-                                                                        z: Math.cbrt(Number(identityData2[0].qty)) / 10,
-                                                                    },
-
-                                                                    {
-                                                                        name: identityData2[1].name,
-                                                                        y: identityData2[1].qty,
-                                                                        z: Math.cbrt(Number(identityData2[1].qty)) / 10,
-                                                                    },
-
-                                                                    {
-                                                                        name: identityData2[2].name,
-                                                                        y: identityData2[2].qty,
-                                                                        z: Math.cbrt(Number(identityData2[2].qty)) / 10,
-                                                                    },
-
-                                                                    {
-                                                                        name: identityData2[3].name,
-                                                                        y: identityData2[3].qty,
-                                                                        z: Math.cbrt(Number(identityData2[3].qty)) / 10,
-
-                                                                    },
-
-                                                                    {
-                                                                        name: identityData2[4].name,
-                                                                        y: identityData2[4].qty,
-                                                                        z: Math.cbrt(Number(identityData2[4].qty)) / 10,
-                                                                    },
-
-                                                                    {
-                                                                        name: identityData2[5].name,
-                                                                        y: identityData2[5].qty,
-                                                                        z: Math.cbrt(Number(identityData2[5].qty)) / 10,
-
-
-                                                                    }],
-                                                            }]
-                                                        })
-                                                        // 2011 - default, hoverstate    , selected state
-                                                    }, stylesUnselected, styleHover, stylesSelected).attr({
-                                                        zIndex: 4,
-                                                    }).add();
-
-                                                    //center button after render with width value
-                                                    chart.dataToggleButton.translate(chart.dataToggleButton.x + chart.dataToggleButton.width / 2, chart.dataToggleButton.y)
-
-
-
-                                                    chart.dataToggleButton2 = chart.renderer.button('2021 Data', x, y, function () {
-                                                        chart.update({
-                                                            title: {
-                                                                text: `2021 Census National Identity of Inhabitants - ${getCookie('clickedMapName')}`,
-                                                            },
-                                                            series: [{
-                                                                minPointSize: 10,
-                                                                innerSize: '20%',
-                                                                zMin: 0,
-                                                                name: 'countries',
-                                                                borderRadius: 10,
-                                                                borderColor: '#000000',
-                                                                borderWidth: 0.5,
-
-                                                                data: [
-                                                                    {
-                                                                        name: identityData[0].name,
-                                                                        y: identityData[0].qty,
-                                                                        z: Math.cbrt(Number(identityData[0].qty)) / 10,
-                                                                    },
-
-                                                                    {
-                                                                        name: identityData[1].name,
-                                                                        y: identityData[1].qty,
-                                                                        z: Math.cbrt(Number(identityData[1].qty)) / 10,
-                                                                    },
-
-                                                                    {
-                                                                        name: identityData[2].name,
-                                                                        y: identityData[2].qty,
-                                                                        z: Math.cbrt(Number(identityData[2].qty)) / 10,
-                                                                    },
-
-                                                                    {
-                                                                        name: identityData[3].name,
-                                                                        y: identityData[3].qty,
-                                                                        z: Math.cbrt(Number(identityData[3].qty)) / 10,
-
-                                                                    },
-
-                                                                    {
-                                                                        name: identityData[4].name,
-                                                                        y: identityData[4].qty,
-                                                                        z: Math.cbrt(Number(identityData[4].qty)) / 10,
-                                                                    },
-
-                                                                    {
-                                                                        name: identityData[5].name,
-                                                                        y: identityData[5].qty,
-                                                                        z: Math.cbrt(Number(identityData[5].qty)) / 10,
-
-
-                                                                    }],
-                                                            }]
-                                                        })
-
-                                                        for (let i = 0; i < identityData.length; i++) {
-                                                            console.log("data = " + identityData[i].qty);
-                                                        }
-
-                                                    }, stylesUnselected, stylesSelected, stylesSelected).attr({
-                                                        zIndex: 4,
-                                                    }).add();
-
-                                                    //center button after render with width value
-                                                    chart.dataToggleButton2.translate(chart.dataToggleButton2.x - chart.dataToggleButton2.width / 2, chart.dataToggleButton2.y)
-                                                },
-                                            }
-
-
-
-
-
-
-
-
-
                                         },
                                         title: {
                                             text: `2021 Census National Identity of Inhabitants - ${getCookie('clickedMapName')}`,
@@ -1137,15 +771,150 @@ function createRegionCharts(){
                                         function(chart) {
 
                                                 // positioning for label - Census Years
-                                                let x = chart.plotWidth / 1.15;
+                                                let x = chart.plotWidth / 1.17;
                                                 let y = chart.plotHeight / 5.9;
-                                            chart.renderer.label('Census year', x, y,'callout')
+                                            chart.renderer.label('Data source date', x, y,'callout')
                                                 .attr({
                                                     fontSize: 12,
                                                     fill: '#FFFFFF',
                                                 })
                                                 .add();
+
+                                            // Togglable 2021/2011 buttons for changing dataset
+                                            newDataButton = chart.renderer.button('2021', chart.plotWidth / 1.15, chart.plotHeight / 4, function(){
+
+                                                stateReset();
+                                                newDataButton.setState(2);
+
+                                                chart.update({
+                                                    title: {
+                                                        text: `2021 Census National Identity of Inhabitants - ${getCookie('clickedMapName')}`,
+                                                    },
+                                                    series: [{
+                                                        minPointSize: 10,
+                                                        innerSize: '20%',
+                                                        zMin: 0,
+                                                        name: 'countries',
+                                                        borderRadius: 10,
+                                                        borderColor: '#000000',
+                                                        borderWidth: 0.5,
+
+                                                        data: [
+                                                            {
+                                                                name: identityData[0].name,
+                                                                y: identityData[0].qty,
+                                                                z: Math.cbrt(Number(identityData[0].qty)) / 10,
+                                                            },
+
+                                                            {
+                                                                name: identityData[1].name,
+                                                                y: identityData[1].qty,
+                                                                z: Math.cbrt(Number(identityData[1].qty)) / 10,
+                                                            },
+
+                                                            {
+                                                                name: identityData[2].name,
+                                                                y: identityData[2].qty,
+                                                                z: Math.cbrt(Number(identityData[2].qty)) / 10,
+                                                            },
+
+                                                            {
+                                                                name: identityData[3].name,
+                                                                y: identityData[3].qty,
+                                                                z: Math.cbrt(Number(identityData[3].qty)) / 10,
+
+                                                            },
+
+                                                            {
+                                                                name: identityData[4].name,
+                                                                y: identityData[4].qty,
+                                                                z: Math.cbrt(Number(identityData[4].qty)) / 10,
+                                                            },
+
+                                                            {
+                                                                name: identityData[5].name,
+                                                                y: identityData[5].qty,
+                                                                z: Math.cbrt(Number(identityData[5].qty)) / 10,
+
+
+                                                            }],
+                                                    }]
+                                                })
+                                            });
+
+                                            newDataButton.setState(2);
+
+                                            newDataButton.add();
+
+
+                                            oldDataButton = chart.renderer.button('2011', chart.plotWidth / 1.08, chart.plotHeight / 4, function(){
+                                                stateReset();
+                                                oldDataButton.setState(2);
+
+                                                chart.update({
+                                                    title: {
+                                                        text: `2011 Census National Identity of Inhabitants - ${getCookie('clickedMapName')}`,
+                                                    },
+                                                    series: [{
+                                                        minPointSize: 10,
+                                                        innerSize: '20%',
+                                                        zMin: 0,
+                                                        name: 'countries',
+                                                        borderRadius: 10,
+                                                        borderColor: '#000000',
+                                                        borderWidth: 0.5,
+
+                                                        data: [
+                                                            {
+                                                                name: identityData2[0].name,
+                                                                y: identityData2[0].qty,
+                                                                z: Math.cbrt(Number(identityData2[0].qty)) / 10,
+                                                            },
+
+                                                            {
+                                                                name: identityData2[1].name,
+                                                                y: identityData2[1].qty,
+                                                                z: Math.cbrt(Number(identityData2[1].qty)) / 10,
+                                                            },
+
+                                                            {
+                                                                name: identityData2[2].name,
+                                                                y: identityData2[2].qty,
+                                                                z: Math.cbrt(Number(identityData2[2].qty)) / 10,
+                                                            },
+
+                                                            {
+                                                                name: identityData2[3].name,
+                                                                y: identityData2[3].qty,
+                                                                z: Math.cbrt(Number(identityData2[3].qty)) / 10,
+
+                                                            },
+
+                                                            {
+                                                                name: identityData2[4].name,
+                                                                y: identityData2[4].qty,
+                                                                z: Math.cbrt(Number(identityData2[4].qty)) / 10,
+                                                            },
+
+                                                            {
+                                                                name: identityData2[5].name,
+                                                                y: identityData2[5].qty,
+                                                                z: Math.cbrt(Number(identityData2[5].qty)) / 10,
+                                                            }],
+                                                    }]
+                                                })
+                                            });
+                                            oldDataButton.add();
+
+
+
+                                            function stateReset() {
+                                                newDataButton.setState(0);
+                                                oldDataButton.setState(0);
+                                            }
                                         });
+
+
 
 
                                     // ---------------------------------------------------------------------------------------------------------------------------------------
