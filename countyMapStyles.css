@@ -3,7 +3,7 @@
     border-left-style: solid;
     border-top-style: solid;
     border-right-style: solid;
-    font-family: sans-serif;
+    /*font-family: sans-serif;*/
     text-align: center;
     font-size: 15px;
     cursor: pointer;
@@ -14,9 +14,11 @@
     width: 100%;
     border-right-style: solid;
     border-top-style: solid;
-    font-family: sans-serif;
+    /*font-family: sans-serif;*/
+    padding-top: 20px;
     text-align: center;
     font-size: 25px;
+    font-weight: bolder;
 }
 
 

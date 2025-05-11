@@ -220,6 +220,11 @@ async function mapSettings(title = 'Ages 0-9') {
             },
             dataLabels: {
                 enabled: true,
+                borderColor: '#000000',
+                // backgroundColor: '#FFFFFF',
+                style:{
+                  color: '#000000'
+                },
 
                 // Formats chart to only return labels for counties that exist in data (england and wales data)
                 formatter: function () {
