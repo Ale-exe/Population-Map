@@ -198,7 +198,7 @@ async function mapSettings(title = 'Ages 0-9') {
             }
         },
 
-        // Formats the mouseover tooltip to ensure an accessible font size used
+        // Formats the mouseover tooltip to ensure an accessible font size used.
         tooltip: {
             formatter: function () {
                 return `<b style="font-size: 18px; ">${this.key}:</b> <br> <p style="font-size: 18px">${this.value} People per km²</p>`;
